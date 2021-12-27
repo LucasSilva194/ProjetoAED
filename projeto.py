@@ -3,7 +3,11 @@ from tkinter import *
 window = Tk()
 window.title("Gestor de Roteiro de Viagens")
 
-#CENTRAR JANELA
+#CRIA UM FICHEIRO CHAMADO basedados.txt CASO O MESMO NÃO EXISTA
+f = open("basedados.txt","a")
+f.close()
+
+#CENTRAR JANELA PRINCIPAL
 w = 500
 h = 200
 ws = window.winfo_screenwidth()
@@ -37,11 +41,16 @@ btn_criar = Button(window, text = "Criar Conta", fg = "blue", font = ("Calibri",
 btn_criar.place (x = 190, y = 140)
 
 #FUNÇÃO CRIAR CONTA
-
-
-
-
-
-
+def Login():
+    f = open("basedados.txt","r")       #ABRE O FICHEIRO basedados.txt PARA VERIFICAR SE O UTILIZADOR JÁ SE ENCONTRA NA LISTA
+    lista = f.readlines()
+    f.close()
+    user = txt_utilizador.get()
+    password = txt_passe.get()
+    for i in range (lista):
+        if lista[user] == password:
+            return True
+        else:
+            return False
 
 window.mainloop()
