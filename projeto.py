@@ -42,15 +42,14 @@ btn_criar.place (x = 190, y = 140)
 
 #FUNÇÃO CRIAR CONTA
 def Login():
-    f = open("basedados.txt","r")       #ABRE O FICHEIRO basedados.txt PARA VERIFICAR SE O UTILIZADOR JÁ SE ENCONTRA NA LISTA
-    lista = f.readlines()
-    f.close()
     user = txt_utilizador.get()
     password = txt_passe.get()
-    for i in range (lista):
-        if lista[user] == password:
-            return True
-        else:
-            return False
+    
+    guardar = user + ";" + password
+    f = open("basedados.txt","r")
+    lista = f.readlines()
+
+    txt_utilizador.set("")
+    txt_passe.set("")
 
 window.mainloop()
