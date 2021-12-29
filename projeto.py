@@ -98,7 +98,7 @@ def CriarConta():
     email = txt_email.get()
     cpassword = txt_cpasse.get()
 
-    guardar = utilizador + ";" + email + ";" + password 
+    guardar = utilizador + ";" + password + ";" + email 
     f = open("basedados.txt","r")
     if utilizador == "" or email == "" or password == "" or cpassword == "":
         messagebox.showerror("Erro","Por favor forneça todos os dados corretamente.")
@@ -115,7 +115,7 @@ def CriarConta():
         else:
             if password == cpassword:
                 f = open("basedados.txt","a")
-                f.write(utilizador + ";" + email + ";" + password + ";" + "user""\n")
+                f.write(utilizador + ";" + password + ";" + email + ";" + "user""\n")
                 messagebox.showinfo("Sucesso","A sua conta foi criada com sucesso!")
 
                 mainWindow()
@@ -128,14 +128,11 @@ def CriarConta():
 #LABEL UTILIZADOR
 lbl_utilizador=Label(window,text="Utilizador:",fg="black",font=("Times New Roman",14))
 
-
 #ENTRY UTILIZADOR
 txt_utilizador=Entry(window,width=30)
 
-
 #LABEL PALAVRA-PASSE
 lbl_passe=Label(window,text="Palavra-Passe:",fg="black",font=("Times New Roman",14))
-
 
 #ENTRY PALAVRA-PASSE
 txt_passe=Entry(window,width=30,show="*")
