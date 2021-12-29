@@ -92,6 +92,8 @@ def CriarConta():
 
     guardar = utilizador + ";" + email1 + ";" + password 
     f = open("basedados.txt","r")
+    if utilizador == "":
+        messagebox.showerror("Erro","Por favor forneça um nome de utilizador")
 
     if utilizador != "" and password != "":
         lista = f.readlines()
