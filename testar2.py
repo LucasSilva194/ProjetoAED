@@ -28,8 +28,8 @@ def Login():
 
 #FUNÇÃO CRIAR CONTA
 def CriarConta():
-    utilizador = txt_utilizador_criar.get()
-    password = txt_passe_criar.get()
+    utilizador = txt_utilizador.get()
+    password = txt_passe.get()
     email = txt_email.get()
     cpassword = txt_cpasse.get()
 
@@ -57,8 +57,8 @@ def CriarConta():
                 messagebox.showerror("Erro","As duas passwords não coincidem")
 
 #CENTRAR JANELA PRINCIPAL
-w = 800
-h = 300
+w = 500
+h = 200
 ws = window.winfo_screenwidth()
 hs = window.winfo_screenheight()
 x = (ws/2) - (w/2)
@@ -67,70 +67,70 @@ window.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
 #------------------EFETUAR LOGIN------------------#
 
-#LABEL EFETUE LOGIN
-lbl_efetue_login=Label(window, text = "Efetue o seu Login:", font=("Times New Roman",25))
-lbl_efetue_login.place(x=480,y = 20)
-
 #LABEL UTILIZADOR
 lbl_utilizador=Label(window,text="Utilizador:",fg="black",font=("Times New Roman",14))
-lbl_utilizador.place(x=460,y=110)
+lbl_utilizador.place(x=120,y=20)
 
 #ENTRY UTILIZADOR
-txt_utilizador=Entry(window,width=20)
-txt_utilizador.place(x=645,y=112)
+txt_utilizador=Entry(window,width=30)
+txt_utilizador.place(x=230,y=22)
 
 #LABEL PALAVRA-PASSE
 lbl_passe=Label(window,text="Palavra-Passe:",fg="black",font=("Times New Roman",14))
-lbl_passe.place(x=460,y=140)
+lbl_passe.place(x=90,y=50)
 
 #ENTRY PALAVRA-PASSE
-txt_passe=Entry(window,width=20,show="*")
-txt_passe.place(x=645,y=143)
+txt_passe=Entry(window,width=30,show="*")
+txt_passe.place(x=230,y=53)
 
 #BOTÃO PARA LOGIN
 btn_login = Button(window, text = "Login", fg = "green", font = ("Calibri", 12),width=15,height=1, command = Login)
-btn_login.place (x = 550, y = 220)
+btn_login.place (x=190,y=100)
 
 #------------------CRIAR UTILIZADOR------------------#
 
-#LABEL CRIAR LOGIN
-lbl_criar_login=Label(window, text = "Crie a sua conta:", font=("Times New Roman",25))
-lbl_criar_login.place(x=100,y = 20)
-
-#LABEL CRIAR UTILIZADOR
-lbl_utilizador_criar=Label(window,text="Utilizador:",fg="black",font=("Times New Roman",14))
-lbl_utilizador_criar.place(x=25,y=80)
-
-#ENTRY CRIAR UTILIZADOR
-txt_utilizador_criar=Entry(window, width=30)
-txt_utilizador_criar.place(x=225,y=82)
-
 #LABEL E-MAIL
 lbl_email=Label(window,text="Email:",fg="black",font=("Times New Roman",14))
-lbl_email.place(x=25,y=110)
 
 #ENTRY E-MAIL
 txt_email=Entry(window, width=30)
-txt_email.place(x=225,y=113)
-
-#LABEL CRIAR PALAVRA-PASSE
-lbl_passe_criar=Label(window,text="Palavra-Passe:",fg="black",font=("Times New Roman",14))
-lbl_passe_criar.place(x=25,y=140)
-
-#ENTRY CRIAR PALAVRA-PASSE
-txt_passe_criar=Entry(window, width=30,show="*")
-txt_passe_criar.place(x=225,y=143)
 
 #LABEL CONFIRMAR PALAVRA-PASSE
 lbl_cpasse=Label(window,text="Confirmar Palavra-Passe:",fg="black",font=("Times New Roman",14))
-lbl_cpasse.place(x=25,y=170)
 
 #ENTRY CONFIRMAR PALAVRA-PASSE
 txt_cpasse=Entry(window, width=30,show="*")
-txt_cpasse.place(x=225,y=173)
+
+def nJanela():
+    w = 450
+    h = 230
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    lbl_utilizador.place(x=30,y=20)
+    txt_utilizador.place(x=230,y=22)
+
+    lbl_email.place(x=30,y=50)
+    txt_email.place(x=230,y=53)
+
+    lbl_passe.place(x=30,y=80)
+    txt_passe.place(x=230,y=83)
+
+    lbl_cpasse.place(x=30,y=110)
+    txt_cpasse.place(x=230,y=113)
+
+    btn_login.destroy()
+    btn_criarconta.destroy()
+
+    btn_criar = Button(window,text="Criar Conta", fg="blue", font = ("Calibri",12), width=15,height=1, command=CriarConta)
+    btn_criar.place(x=160,y=160)
 
 #BOTÃO CRIAR CONTA
-btn_criarconta = Button(window, text = "Criar Conta", fg = "blue", font = ("Calibri", 12),width=15,height=1, command = CriarConta)
-btn_criarconta.place (x = 155, y = 220)
+btn_criarconta = Button(window, text = "Criar Conta", fg = "blue", font = ("Calibri", 12),width=15,height=1, command = nJanela)
+btn_criarconta.place (x = 190, y = 140)
+
 
 window.mainloop()
