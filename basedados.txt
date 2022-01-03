@@ -1,2 +1,3 @@
 
-lucas;123;lucas@gmail.com;user
+lucas;123;lucas@gmail.com;admin
+fred;456;fred@gmail.com;user

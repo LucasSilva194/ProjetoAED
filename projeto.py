@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
-
+from PIL import ImageTk, Image
 window = Tk()
 window.title("Gestor de Roteiro de Viagens")
 
@@ -74,7 +74,27 @@ def nJanela():
     btn_login.place_forget()
     btn_criarconta.place_forget()
 
-    
+#-----------------------FUNÇÃO JANELA-----------------------#
+def JanelaApp():
+    w = 1000
+    h = 750
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    #Limpar janela
+    btn_login.place_forget()
+    btn_criarconta.place_forget()
+    lbl_utilizador.place_forget()
+    txt_utilizador.place_forget()
+    lbl_passe.place_forget()
+    txt_passe.place_forget()
+
+    btn_guias.place(x=100,y=100)
+
+
 #-----------------------FUNÇÃO LOGIN-----------------------#
 def Login():
 
@@ -96,7 +116,8 @@ def Login():
     #CASO OS DADOS DE ACESSO ESTEJAM CORRETOS, EFETUA LOGIN
     else:
         if str(guardar) in str(lista):
-            messagebox.showinfo("Bem vindo",f"Olá {user}, o seu login foi efetuado com sucesso")
+           messagebox.showinfo("Bem vindo",f"Olá {user}, o seu login foi efetuado com sucesso")
+           JanelaApp()
         
         #SE OS DADOS ESTIVEREM ERRADOS, RETORNA UM ERRO
         else:
@@ -147,12 +168,19 @@ def CriarConta():
                 messagebox.showerror("Erro","As duas passwords não coincidem")
 
 
-#-----------------------EFETUAR LOGIN-----------------------#
+#-----------------------CRIAÇÃO DE LABELS E ENTRIES-----------------------#
+
 #LABEL UTILIZADOR
 lbl_utilizador=Label(window,text="Utilizador:",fg="black",font=("Times New Roman",14))
 
 #ENTRY UTILIZADOR
 txt_utilizador=Entry(window,width=30)
+
+#LABEL E-MAIL
+lbl_email=Label(window,text="Email:",fg="black",font=("Times New Roman",14))
+
+#ENTRY E-MAIL
+txt_email=Entry(window, width=30)
 
 #LABEL PALAVRA-PASSE
 lbl_passe=Label(window,text="Palavra-Passe:",fg="black",font=("Times New Roman",14))
@@ -160,19 +188,14 @@ lbl_passe=Label(window,text="Palavra-Passe:",fg="black",font=("Times New Roman",
 #ENTRY PALAVRA-PASSE
 txt_passe=Entry(window,width=30,show="*")
 
-
-#-----------------------CRIAR UTILIZADOR-----------------------#
-#LABEL E-MAIL
-lbl_email=Label(window,text="Email:",fg="black",font=("Times New Roman",14))
-
-#ENTRY E-MAIL
-txt_email=Entry(window, width=30)
-
 #LABEL CONFIRMAR PALAVRA-PASSE
 lbl_cpasse=Label(window,text="Confirmar Palavra-Passe:",fg="black",font=("Times New Roman",14))
 
 #ENTRY CONFIRMAR PALAVRA-PASSE
 txt_cpasse=Entry(window, width=30,show="*")
+
+
+#-----------------------CRIAÇÃO DE BOTÕES-----------------------#
 
 #BOTÃO PARA LOGIN
 btn_login = Button(window, text = "Login", fg = "green", font = ("Calibri", 12),width=15,height=1, command = Login)
@@ -182,6 +205,10 @@ btn_criarconta = Button(window, text = "Criar Conta", fg = "blue", font = ("Cali
 
 #BOTÃO DE CRIAR CONTA QUE EXECUTA A FUNÇÃO
 btn_criar = Button(window,text="Criar Conta", fg="blue", font = ("Calibri",12), width=15,height=1, command=CriarConta)
+
+#BOTÃO GUIAS E ROTEIROS
+foto_guias = ImageTk.PhotoImage(Image.open("índice.png"),width=400, height=200)
+btn_guias = Button(window, text = "Guias e Roteiros", image=foto_guias, width = 400, height = 200)
 
 
 mainWindow()
