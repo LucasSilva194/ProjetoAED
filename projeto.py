@@ -91,6 +91,10 @@ def JanelaApp():
     txt_utilizador.place_forget()
     lbl_passe.place_forget()
     txt_passe.place_forget()
+    user = txt_utilizador.get()
+
+    lbl_user = Label(window, text= f"Utilizador: {user}",fg="black")
+    lbl_user.place(x=10,y=10)
 
     btn_guias.place(x=100,y=100)
 
@@ -207,8 +211,8 @@ btn_criarconta = Button(window, text = "Criar Conta", fg = "blue", font = ("Cali
 btn_criar = Button(window,text="Criar Conta", fg="blue", font = ("Calibri",12), width=15,height=1, command=CriarConta)
 
 #BOTÃO GUIAS E ROTEIROS
-foto_guias = ImageTk.PhotoImage(Image.open("índice.png"),width=400, height=200)
-btn_guias = Button(window, text = "Guias e Roteiros", image=foto_guias, width = 400, height = 200)
+foto_guias = ImageTk.PhotoImage(Image.open("original.gif"))
+btn_guias = Button(window, text = "Guias e Roteiros", image=foto_guias, width = 200, height = 150)
 
 
 mainWindow()
