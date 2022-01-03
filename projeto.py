@@ -8,10 +8,10 @@ window.title("Gestor de Roteiro de Viagens")
 f = open("basedados.txt","a")
 f.close()
 
-#FUNÇÃO DA JANELA PRINCIPAL 
+#-----------------------FUNÇÃO DA JANELA PRINCIPAL-----------------------#
 def mainWindow():
 
-    #CENTRAR JANELA PRINCIPAL
+    #CENTRAR JANELA
     w = 500
     h = 200
     ws = window.winfo_screenwidth()
@@ -39,7 +39,7 @@ def mainWindow():
     txt_cpasse.place_forget()
     btn_criar.place_forget()
 
-#FUNÇÃO PARA JANELA DE CRIAR CONTA
+#-----------------------FUNÇÃO JANELA DE CRIAR CONTA-----------------------#
 def nJanela():
 
     #ALTERAR AS DIMENSÕES DA JANELA PARA INSERIR NOVOS CAMPOS
@@ -67,51 +67,75 @@ def nJanela():
     lbl_cpasse.place(x=30,y=110)
     txt_cpasse.place(x=230,y=113)
 
+    #PLACE DO BOTÃO CRIAR 
+    btn_criar.place(x=160,y=160)
+
     #APAGAR OS BOTÕES DE LOGIN E DE CRIAR CONTA
     btn_login.place_forget()
     btn_criarconta.place_forget()
 
-    btn_criar.place(x=160,y=160)
-
-#FUNÇÃO LOGIN
+    
+#-----------------------FUNÇÃO LOGIN-----------------------#
 def Login():
+
+    #BUSCA O USUÁRIO E A PASSWORD INSERIDOS
     user = txt_utilizador.get()
     password = txt_passe.get()
 
+    #GUARDA OS DADOS DE LOGIN NUMA STRING
     guardar = user + ";" + password
+
+    #ABRE O FICHEIRO basedados.txt E ADICIONA OS DADOS PARA UMA STRING
     f = open("basedados.txt","r")
     lista = f.readlines()
 
+    #CASO OS CAMPOS "UTILIZADOR" OU "PALAVRA-PASSE" ESTEJAM VAZIOS, RETORNA UM ERRO
     if user == "" or password == "":
         messagebox.showerror("Erro","Por favor forneça os seus dados de Acesso")
+    
+    #CASO OS DADOS DE ACESSO ESTEJAM CORRETOS, EFETUA LOGIN
     else:
         if str(guardar) in str(lista):
             messagebox.showinfo("Bem vindo",f"Olá {user}, o seu login foi efetuado com sucesso")
+        
+        #SE OS DADOS ESTIVEREM ERRADOS, RETORNA UM ERRO
         else:
             messagebox.showerror("Tentativa de Login sem sucesso","Utilizador ou palavra-passe incorreta. Por favor tente novamente ou crie conta.")
             txt_passe.delete(0,"end")              
 
-#FUNÇÃO CRIAR CONTA
+
+#-----------------------FUNÇÃO CRIAR CONTA-----------------------#
 def CriarConta():
+
+    #BUSCA OS DADOS DE ACESSO (UTILIZADOR, PASSWORD E EMAIL)
     utilizador = txt_utilizador.get()
     password = txt_passe.get()
     email = txt_email.get()
     cpassword = txt_cpasse.get()
 
-    guardar = utilizador + ";" + password + ";" + email 
+    #GUARDA OS DADOS DE ACESSO INSERIDOS PARA UMA STRING
+    guardar = utilizador + ";" + password + ";" + email
+
+    #ABRE O FICHEIRO basedados.txt PARA LEITURA
     f = open("basedados.txt","r")
+
+    #CASO ALGUM DOS CAMPOS ESTEJA VAZIO, RETORNA UM ERRO
     if utilizador == "" or email == "" or password == "" or cpassword == "":
         messagebox.showerror("Erro","Por favor forneça todos os dados corretamente.")
 
+    #SE OS CAMPOS UTILIZADOR E PALAVRA-PASSE ESTIVEREM PREENCHIDOS, ADICIONA OS DADOS DO FICHEIRO basedados.txt PARA UMA STRING
     if utilizador != "" and password != "":
         lista = f.readlines()
 
+        #VERIFICA SE OS DADOS JÁ SE ENCONTRAM NO FICHEIRO
         if str(guardar) in str(lista):
             messagebox.showerror("Erro","Já existe uma conta com esses dados, por favor efetue login")
-            
+
+        #VERIFICA SE O NOME DE UTILIZADOR JÁ ESTÁ EM USO 
         elif str(utilizador) in str(lista):
             messagebox.showerror("Erro","Esse utilizador já existe")
-            
+
+        #SE A PALAVRA-PASSE FOR CONFIRMADA CORRETAMENTE CRIA A CONTA  
         else:
             if password == cpassword:
                 f = open("basedados.txt","a")
@@ -123,8 +147,7 @@ def CriarConta():
                 messagebox.showerror("Erro","As duas passwords não coincidem")
 
 
-#------------------EFETUAR LOGIN------------------#
-
+#-----------------------EFETUAR LOGIN-----------------------#
 #LABEL UTILIZADOR
 lbl_utilizador=Label(window,text="Utilizador:",fg="black",font=("Times New Roman",14))
 
@@ -137,8 +160,8 @@ lbl_passe=Label(window,text="Palavra-Passe:",fg="black",font=("Times New Roman",
 #ENTRY PALAVRA-PASSE
 txt_passe=Entry(window,width=30,show="*")
 
-#------------------CRIAR UTILIZADOR------------------#
 
+#-----------------------CRIAR UTILIZADOR-----------------------#
 #LABEL E-MAIL
 lbl_email=Label(window,text="Email:",fg="black",font=("Times New Roman",14))
 
@@ -159,6 +182,7 @@ btn_criarconta = Button(window, text = "Criar Conta", fg = "blue", font = ("Cali
 
 #BOTÃO DE CRIAR CONTA QUE EXECUTA A FUNÇÃO
 btn_criar = Button(window,text="Criar Conta", fg="blue", font = ("Calibri",12), width=15,height=1, command=CriarConta)
+
 
 mainWindow()
 window.mainloop()
