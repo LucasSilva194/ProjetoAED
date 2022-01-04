@@ -77,7 +77,7 @@ def nJanela():
 #-----------------------FUNÇÃO JANELA-----------------------#
 def JanelaApp():
     w = 1000
-    h = 750
+    h = 550
     ws = window.winfo_screenwidth()
     hs = window.winfo_screenheight()
     x = (ws/2) - (w/2)
@@ -96,9 +96,10 @@ def JanelaApp():
     lbl_user = Label(window, text= f"Utilizador: {user}",fg="black")
     lbl_user.place(x=10,y=10)
 
-    btn_guias.place(x=100,y=100)
-
-
+    btn_guias.place(x=30,y=100)
+    btn_roadtrip.place(x=260,y=100)
+    btn_trilhos.place(x=490,y=100)
+    btn_praia.place(x=720,y=100)
 #-----------------------FUNÇÃO LOGIN-----------------------#
 def Login():
 
@@ -211,9 +212,20 @@ btn_criarconta = Button(window, text = "Criar Conta", fg = "blue", font = ("Cali
 btn_criar = Button(window,text="Criar Conta", fg="blue", font = ("Calibri",12), width=15,height=1, command=CriarConta)
 
 #BOTÃO GUIAS E ROTEIROS
-foto_guias = ImageTk.PhotoImage(Image.open("original.gif"))
-btn_guias = Button(window, text = "Guias e Roteiros", image=foto_guias, width = 200, height = 150)
+foto_guias = ImageTk.PhotoImage(Image.open("guias.png"))
+btn_guias = Button(window, text = "", fg="black", width = 220, height = 395,image = foto_guias)
 
+#BOTÃO ROADTRIPS
+foto_roadtrips=ImageTk.PhotoImage(Image.open("roadtrips.png"))
+btn_roadtrip=Button(window, text = "", width = 220, height = 395,image = foto_roadtrips)
+
+#BOTÃO TRILHOS E OUTDOORS
+foto_trilhos=ImageTk.PhotoImage(Image.open("trilhos.png"))
+btn_trilhos=Button(window, text = "",width = 220, height = 395,image = foto_trilhos)
+
+#BOTÃO PRAIA
+foto_praia=ImageTk.PhotoImage(Image.open("praias.png"))
+btn_praia=Button(window,text="",width = 220, height = 395,image = foto_praia)
 
 mainWindow()
 window.mainloop()
