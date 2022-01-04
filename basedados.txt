@@ -1,3 +1,2 @@
-
-lucas;123;lucas@gmail.com;admin
-fred;456;fred@gmail.com;user
+lucas;123;admin;lucas@gmail.com
+chico;456;user;chigo@email.com
