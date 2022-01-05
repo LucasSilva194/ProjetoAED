@@ -12,8 +12,10 @@ f.close()
 def dev():
     messagebox.showinfo("ACESSO RESTRITO","Esta página ainda se encontra em desenvolvimento. Pedimos desculpa pelo incómodo causado.")
 
-#-----------------------------FUNÇÃO DA INICIAL---------------------------#
-def mainWindow():
+#region LOGIN E CRIAÇÃO DE CONTA
+
+#-------------------------FUNÇÃO DA JANELA INICIAL-------------------------#
+def JanelaLogin():
 
     #CENTRAR JANELA
     w = 500
@@ -36,7 +38,7 @@ def mainWindow():
     btn_login.place (x=190,y=100)
     btn_criarconta.place (x = 190, y = 140)
 
-    #ESQUECE O POSICIONAMENTO DAS LABELS NÃO NECESSÁRIAS
+    #REMOVE ENTRIES E LABELS NÃO NECESSÁRIAS
     lbl_email.place_forget()
     txt_email.place_forget()
     lbl_cpasse.place_forget() 
@@ -45,7 +47,7 @@ def mainWindow():
     btn_retornar.place_forget()
 
 #-----------------------FUNÇÃO JANELA DE CRIAR CONTA----------------------#
-def nJanela():
+def JanelaCriar():
 
     #ALTERAR AS DIMENSÕES DA JANELA PARA INSERIR NOVOS CAMPOS
     w = 450
@@ -80,230 +82,6 @@ def nJanela():
     btn_login.place_forget()
     btn_criarconta.place_forget()
 
-#------------------------------FUNÇÃO JANELA------------------------------#
-def JanelaApp():
-
-    #REDIMENSIONAR A JANELA
-    w = 980
-    h = 550
-    ws = window.winfo_screenwidth()
-    hs = window.winfo_screenheight()
-    x = (ws/2) - (w/2)
-    y = (hs/2) - (h/2)
-    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
-    window.configure(bg ="white")
-
-    #ESQUECE OS BOTÕES NÃO NECESSÁRIOS DE INICIO DE SESSÃO
-    btn_login.place_forget()
-    btn_criarconta.place_forget()
-    btn_retornar_menu.place_forget()
-
-    #ESQUECE OS BOTÕES DAS PRAIAS
-    btn_kaanapali.place_forget()
-    btn_anse.place_forget()
-    btn_navagio.place_forget()
-    btn_zlatni.place_forget()
-
-    #ESQUECE OS BOTÕES DAS MONTANHAS
-    btn_kilimanjaro.place_forget()
-    btn_kirkjufell.place_forget()
-    btn_matterhorn.place_forget()
-    btn_estrela.place_forget()
-
-    #ESQUECE AS LABELS NÃO NECESSÁRIAS
-    lbl_passe.place_forget()
-    lbl_utilizador.place_forget()
-    lbl_praias.place_forget()
-
-    #ESQUECE AS ENTRIES NÃO NECESSÁRIAS
-    txt_utilizador.place_forget()
-    txt_passe.place_forget()
-
-    #INSERE O NOME DE UTILIZADOR QUE ESTÁ AUTENTICADO
-    user = txt_utilizador.get()
-    lbl_user = Label(window, text= f"Utilizador: {user}",fg="black",font = ("Calibri", 10),width=20,height=1,bg = "white")
-    lbl_user.place(x=10,y=20)
-
-    #INSERE O TITULO DA PÁGINA
-    lbl_menu.place(x=230, y=20)
-
-    #BOTÃO PARA FECHAR TUDO
-    btn_sair.place(x=856, y=10)
-
-    #INSERE OS BOTÕES DE GUIAS, MONTANHAS, CIDADES E PRAIAS
-    btn_guias.place(x=30,y=100)
-    btn_montanhas.place(x=260,y=100)
-    btn_cidades.place(x=490,y=100)
-    btn_praia.place(x=720,y=100)
-
-#-------------------------FUNÇÃO GUIAS E ROTEIROS-------------------------#
-def guias_roteiros():
-
-    #REDIMENSIONAR A JANELA
-    w = 500
-    h = 500
-    ws = window.winfo_screenwidth()
-    hs = window.winfo_screenheight()
-    x = (ws/2) - (w/2)
-    y = (hs/2) - (h/2)
-    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
-    
-    #ESQUECE OS BOTÕES NÃO NECESSÁRIOS
-    btn_guias.place_forget()
-    btn_montanhas.place_forget()
-    btn_cidades.place_forget()
-    btn_praia.place_forget()
-    btn_retornar.place_forget()
-    btn_sair.place_forget()
-
-    #ESQUECE A LABEL DO MENU
-    lbl_menu.place_forget()
-
-    #INSERE O BOTÃO PARA RETORNAR AO MENU PRINCIPAL
-    btn_retornar_menu.place(x=380,y=10)
-
-#----------------------------FUNÇÃO ROADTRIPS-----------------------------#
-def montanhas():
-
-    #REDIMENSIONAR A JANELA
-    w = 885
-    h = 560
-    ws = window.winfo_screenwidth()
-    hs = window.winfo_screenheight()
-    x = (ws/2) - (w/2)
-    y = (hs/2) - (h/2)
-    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
-
-    window.configure(bg ="lightgrey")
-    
-    #ESQUECE OS BOTÕES NÃO NECESSÁRIOS
-    btn_guias.place_forget()
-    btn_montanhas.place_forget()
-    btn_cidades.place_forget()
-    btn_praia.place_forget()
-    btn_sair.place_forget()
-
-    #ESQUECE A LABEL DO MENU PRINCIPAL
-    lbl_menu.place_forget()
-
-    #INSERE O BOTÃO PARA RETORNAR AO MENU
-    btn_retornar_menu.place(x=740,y=17)
-
-    #INSERE O NOME DE UTILIZADOR QUE ESTÁ AUTENTICADO
-    user = txt_utilizador.get()
-    lbl_user = Label(window, text= f"Utilizador: {user}",fg="black",font = ("Calibri", 10),width=20,height=1,bg = "lightgrey")
-    lbl_user.place(x=10,y=20)
-    
-    #BOTÃO KILIMANJARO
-    btn_kilimanjaro.place(x=55,y=90)
-
-    #BOTÃO KIRKJUFELL
-    btn_kirkjufell.place(x=55, y=310)
-
-    #BOTÃO MATTERHORN
-    btn_matterhorn.place(x=450,y=90)
-
-    #BOTÃO SERRA DA ESTRELA
-    btn_estrela.place(x=450, y=310)
-
-#-----------------------------FUNÇÃO CIDADES------------------------------#
-def cidades():
-
-    #REDIMENSIONA A JANELA
-    w = 500
-    h = 500
-    ws = window.winfo_screenwidth()
-    hs = window.winfo_screenheight()
-    x = (ws/2) - (w/2)
-    y = (hs/2) - (h/2)
-    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
-    
-    #ESQUECE OS BOTÕES NÃO NECESSÁRIOS
-    btn_guias.place_forget()
-    btn_montanhas.place_forget()
-    btn_cidades.place_forget()
-    btn_praia.place_forget()
-    btn_sair.place_forget()
-
-    #ESQUECE A LABEL DO MENU PRINCIPAL
-    lbl_menu.place_forget()
-
-    #INSERE O BOTÃO PARA RETORNAR AO MENU PRINCIPAL
-    btn_retornar_menu.place(x=380,y=10)
-
-#-----------------------------FUNÇÃO PRAIAS-------------------------------#
-def praias():
-
-    #REDIMENSIONAR A JANELA
-    w = 885
-    h = 560
-    ws = window.winfo_screenwidth()
-    hs = window.winfo_screenheight()
-    x = (ws/2) - (w/2)
-    y = (hs/2) - (h/2)
-    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
-
-    window.configure(bg ="lightblue")
-
-    #ESQUECE OS BOTÕES NÃO NECESSÁRIOS
-    btn_guias.place_forget()
-    btn_montanhas.place_forget()
-    btn_cidades.place_forget()
-    btn_praia.place_forget()
-    btn_sair.place_forget()
-
-    #ESQUECE A LABEL DO MENU PRINCIPAL
-    lbl_menu.place_forget()
-
-    #INSERE O BOTÃO PARA RETORNAR AO MENU PRINCIPAL
-    btn_retornar_menu.place(x=740,y=17)
-
-    #INSERE O NOME DE UTILIZADOR QUE ESTÁ AUTENTICADO
-    user = txt_utilizador.get()
-    lbl_user = Label(window, text= f"Utilizador: {user}",fg="black",font = ("Calibri", 10),width=20,height=1,bg = "lightblue")
-    lbl_user.place(x=10,y=20)
-
-    #TITULO DA JANELA
-    lbl_praias.place(x=190,y=20)
-    
-    #BOTÃO DA PRAIA ANSE
-    btn_anse.place(x=55,y=90)
-
-    #BOTÃO PRAIA NAVAGIO
-    btn_navagio.place(x=55, y=310)
-
-    #BOTÃO PRAIA ZLATNI
-    btn_zlatni.place(x=450,y=90)
-
-    #BOTÃO PRAIA KAANAPALI
-    btn_kaanapali.place(x=450, y=310)
-
-def navagio():
-
-    #REDIMENSIONAR A JANELA
-    w = 885
-    h = 560
-    ws = window.winfo_screenwidth()
-    hs = window.winfo_screenheight()
-    x = (ws/2) - (w/2)
-    y = (hs/2) - (h/2)
-    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
-
-    window.configure(bg ="lightblue")
-
-    #REMOVE OS BOTÕES DAS PRAIAS
-    btn_navagio.place_forget()
-    btn_anse.place_forget()
-    btn_zlatni.place_forget()
-    btn_kaanapali.place_forget()
-
-    #INSERE A IMAGEM
-    lbl_navagio=Label(window,text="",width = 375, height = 200,image = foto_navagio)
-    lbl_navagio.place(x=445, y=200, anchor = CENTER)
-
-    #DESCRIÇÃO DA PRAIA
-    desc_navagio = Label(window,text="Navagio está localizado no noroeste de Zakynthos (Ilha grega). As colinas de alturas variáveis que\nprotegem a baía e a praia dos ventos fortes contribuem para a sua singularidade. A praia é coberta por\nareia macia e limpa de cor creme e uma água bastante clara.", font=("Calibri 14"),bg="lightblue", width = 80, height = 4)
-    desc_navagio.place(x=445,y=400, anchor=CENTER)
 #-----------------------------FUNÇÃO LOGIN--------------------------------#
 def Login():
 
@@ -375,102 +153,179 @@ def CriarConta():
                 f = open("basedados.txt","a")
                 f.write(utilizador + ";" + password + ";" + "user" + ";" + email + "\n")
                 messagebox.showinfo("Sucesso","A sua conta foi criada com sucesso!")
-
-                mainWindow()
+                JanelaLogin()
             else:
                 messagebox.showerror("Erro","As duas passwords não coincidem.")
 
-#-----------------------CRIAÇÃO DE LABELS E ENTRIES-----------------------#
+#BOTÃO PARA LOGIN E CRIAR CONTA
+btn_login = Button(window, text = "Login", fg = "white", bg="green", font = ("Calibri 12 bold"),width=15,height=1, command = Login)
+btn_criarconta = Button(window, text = "Criar Conta", fg = "white",bg="blue", font = ("Calibri 12 bold"),width=15,height=1, command = JanelaCriar)
+btn_criar = Button(window,text="Criar Conta", fg="white",bg="green", font = ("Calibri 12 bold"), width=15,height=1, command=CriarConta)
 
-#LABEL UTILIZADOR
+#UTILIZADOR
 lbl_utilizador=Label(window,text="Utilizador:",fg="black",font=("Times New Roman",14))
-
-#ENTRY UTILIZADOR
 txt_utilizador=Entry(window,width=30)
 
-#LABEL E-MAIL
+#E-MAIL
 lbl_email=Label(window,text="Email:",fg="black",font=("Times New Roman",14))
-
-#ENTRY E-MAIL
 txt_email=Entry(window, width=30)
 
-#LABEL PALAVRA-PASSE
+#PALAVRA-PASSE
 lbl_passe=Label(window,text="Palavra-Passe:",fg="black",font=("Times New Roman",14))
-
-#ENTRY PALAVRA-PASSE
 txt_passe=Entry(window,width=30,show="*")
 
-#LABEL CONFIRMAR PALAVRA-PASSE
+#CONFIRMAR PALAVRA-PASSE
 lbl_cpasse=Label(window,text="Confirmar Palavra-Passe:",fg="black",font=("Times New Roman",14))
-
-#ENTRY CONFIRMAR PALAVRA-PASSE
 txt_cpasse=Entry(window, width=30,show="*")
+
+#BOTÃO RETORNAR
+btn_retornar = Button(window,text="<-- Retornar", fg="white",bg="red", font = ("Calibri 12 bold"), width=15,height=1, command=JanelaLogin)
+
+#endregion
+
+#region JANELA DA APP
+def JanelaApp():
+
+    #REDIMENSIONAR A JANELA
+    w = 980
+    h = 550
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+    window.configure(bg ="white")
+
+    #REMOVE OS BOTÕES NÃO NECESSÁRIOS DE INICIO DE SESSÃO
+    btn_login.place_forget()
+    btn_criarconta.place_forget()
+    btn_retornar_menu.place_forget()
+
+    #REMOVE OS BOTÕES DAS PRAIAS
+    btn_kaanapali.place_forget()
+    btn_anse.place_forget()
+    btn_navagio.place_forget()
+    btn_zlatni.place_forget()
+
+    #REMOVE BOTÕES DAS MONTANHAS
+    btn_kilimanjaro.place_forget()
+    btn_kirkjufell.place_forget()
+    btn_matterhorn.place_forget()
+    btn_estrela.place_forget()
+
+    #REMOVE AS LABELS E ENTRIES NÃO NECESSÁRIAS
+    lbl_passe.place_forget()
+    lbl_utilizador.place_forget()
+    lbl_praias.place_forget()
+    txt_utilizador.place_forget()
+    txt_passe.place_forget()
+
+    #INSERE O NOME DE UTILIZADOR QUE ESTÁ AUTENTICADO
+    user = txt_utilizador.get()
+    lbl_user = Label(window, text= f"Utilizador: {user}",fg="black",font = ("Calibri", 10),width=20,height=1,bg = "white")
+    lbl_user.place(x=10,y=20)
+
+    #INSERE O TITULO DA PÁGINA
+    lbl_menu.place(x=490, y=60,anchor=CENTER)
+
+    #BOTÃO PARA FECHAR TUDO
+    btn_sair.place(x=856, y=10)
+
+    #INSERE OS BOTÕES DE GUIAS, MONTANHAS, CIDADES E PRAIAS
+    btn_guias.place(x=30,y=100)
+    btn_montanhas.place(x=260,y=100)
+    btn_cidades.place(x=490,y=100)
+    btn_praia.place(x=720,y=100)
 
 #LABEL MENU PRINCIPAL
 lbl_menu = Label(window, text="MENU PRINCIPAL",fg = "black", bg="white", font=("Calibri 25 bold"), width = 30, height = 1)
 
-#LABEL PRAIAS
-lbl_praias = Label(window, text= "PRAIAS",fg = "black", bg="lightblue", font=("Calibri 25 bold"), width = 30, height = 1)
-
-#-----------------------------CRIAÇÃO DE BOTÕES--------------------------#
-
-#BOTÃO PARA LOGIN
-btn_login = Button(window, text = "Login", fg = "white", bg="green", font = ("Calibri 12 bold"),width=15,height=1, command = Login)
-
-#BOTÃO CRIAR CONTA
-btn_criarconta = Button(window, text = "Criar Conta", fg = "white",bg="blue", font = ("Calibri 12 bold"),width=15,height=1, command = nJanela)
-
-#BOTÃO DE CRIAR CONTA QUE EXECUTA A FUNÇÃO
-btn_criar = Button(window,text="Criar Conta", fg="white",bg="green", font = ("Calibri 12 bold"), width=15,height=1, command=CriarConta)
-
-#BOTÃO RETORNAR
-btn_retornar = Button(window,text="<-- Retornar", fg="white",bg="red", font = ("Calibri 12 bold"), width=15,height=1, command=mainWindow)
-
-#BOTÃO GUIAS E ROTEIROS
-foto_guias = ImageTk.PhotoImage(Image.open("guias.png"))
-btn_guias = Button(window, text = "", fg="black", width = 220, height = 395,image = foto_guias, command = guias_roteiros)
-
-#BOTÃO ROADTRIPS
-foto_roadtrips=ImageTk.PhotoImage(Image.open("roadtrips.png"))
-btn_roadtrip=Button(window, text = "", width = 220, height = 395,image = foto_roadtrips)
-
-#BOTÃO TRILHOS E OUTDOORS
-foto_trilhos=ImageTk.PhotoImage(Image.open("trilhos.png"))
-btn_trilhos=Button(window, text = "",width = 220, height = 395,image = foto_trilhos)
-
 #BOTÃO SAIR
 btn_sair = Button(window, text = "SAIR", fg = "red", font = ("Calibri", 12),width=10,height=1, command = window.quit)
 
-#### BOTÕES PRAIAS ####
+#BOTÃO RETORNAR MENU
+btn_retornar_menu = Button(window, text="Menu", fg="black",font = ("Calibri 12 bold"), width=10,height=1, command=JanelaApp)
 
-#PRINCIPAL
-foto_praia=ImageTk.PhotoImage(Image.open("praias.png"))
-btn_praia=Button(window,text="",width = 220, height = 395,image = foto_praia, command = praias)
+#endregion
 
-#NAVAGIO
-foto_navagio = ImageTk.PhotoImage(Image.open("navagio.png"))
-btn_navagio = Button(window,text="",width = 375, height = 200,image = foto_navagio,command=navagio)
+#region GUIAS E ROTEIROS
 
-#ANSE
-foto_anse = ImageTk.PhotoImage(Image.open("anse.png"))
-btn_anse = Button(window,text="",width = 375, height = 200,image = foto_anse,command=dev)
+def guias_roteiros():
 
-#ZLATNI
-foto_zlatni = ImageTk.PhotoImage(Image.open("zlatni.png"))
-btn_zlatni = Button(window,text="",width = 375, height = 200,image = foto_zlatni,command=dev)
+    #REDIMENSIONAR A JANELA
+    w = 500
+    h = 500
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+    
+    #ESQUECE OS BOTÕES NÃO NECESSÁRIOS
+    btn_guias.place_forget()
+    btn_montanhas.place_forget()
+    btn_cidades.place_forget()
+    btn_praia.place_forget()
+    btn_retornar.place_forget()
+    btn_sair.place_forget()
 
-#KAANAPALI
-foto_kaanapali = ImageTk.PhotoImage(Image.open("Kaanapali.png"))
-btn_kaanapali = Button(window,text="",width = 375, height = 200,image = foto_kaanapali,command=dev)
+    #ESQUECE A LABEL DO MENU
+    lbl_menu.place_forget()
 
-#### BOTÕES CIDADES ####
-foto_cidades=ImageTk.PhotoImage(Image.open("cidades.png"))
-btn_cidades=Button(window,text="",width = 220, height = 395,image = foto_cidades,command = cidades)
+    #INSERE O BOTÃO PARA RETORNAR AO MENU PRINCIPAL
+    btn_retornar_menu.place(x=380,y=10)
 
+#BOTÃO GUIAS E ROTEIROS
+foto_guias = ImageTk.PhotoImage(Image.open("guias.png"))
+btn_guias = Button(window, text = "", fg="black", width = 220, height = 395,image = foto_guias, command = dev)
 
-#### BOTÕES MONTANHAS ####
+#endregion
 
-#PRINCIPAL
+#region MONTANHAS
+def montanhas():
+
+    #REDIMENSIONAR A JANELA
+    w = 885
+    h = 560
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    window.configure(bg ="lightgrey")
+    
+    #ESQUECE OS BOTÕES NÃO NECESSÁRIOS
+    btn_guias.place_forget()
+    btn_montanhas.place_forget()
+    btn_cidades.place_forget()
+    btn_praia.place_forget()
+    btn_sair.place_forget()
+
+    #ESQUECE A LABEL DO MENU PRINCIPAL
+    lbl_menu.place_forget()
+
+    #INSERE O BOTÃO PARA RETORNAR AO MENU
+    btn_retornar_menu.place(x=740,y=17)
+
+    #INSERE O NOME DE UTILIZADOR QUE ESTÁ AUTENTICADO
+    user = txt_utilizador.get()
+    lbl_user = Label(window, text= f"Utilizador: {user}",fg="black",font = ("Calibri", 10),width=20,height=1,bg = "lightgrey")
+    lbl_user.place(x=10,y=20)
+    
+    #BOTÃO KILIMANJARO
+    btn_kilimanjaro.place(x=55,y=90)
+
+    #BOTÃO KIRKJUFELL
+    btn_kirkjufell.place(x=55, y=310)
+
+    #BOTÃO MATTERHORN
+    btn_matterhorn.place(x=450,y=90)
+
+    #BOTÃO SERRA DA ESTRELA
+    btn_estrela.place(x=450, y=310)
+
+#BOTÃO MONTANHAS
 foto_montanhas=ImageTk.PhotoImage(Image.open("montanhas.png"))
 btn_montanhas=Button(window,text="",width = 220, height = 395,image = foto_montanhas, command = montanhas)
 
@@ -490,9 +345,261 @@ btn_matterhorn=Button(window,text="",width = 375, height = 200,image = foto_matt
 foto_estrela = ImageTk.PhotoImage(Image.open("estrela.png"))
 btn_estrela=Button(window,text="",width = 375, height = 200,image = foto_estrela,command=dev)
 
-#BOTÃO RETORNAR MENU
-btn_retornar_menu = Button(window, text="Menu", fg="black",font = ("Calibri 12 bold"), width=10,height=1, command=JanelaApp)
+#endregion
 
+#region CIDADES
+def cidades():
 
-mainWindow()
+    #REDIMENSIONA A JANELA
+    w = 500
+    h = 500
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+    
+    #ESQUECE OS BOTÕES NÃO NECESSÁRIOS
+    btn_guias.place_forget()
+    btn_montanhas.place_forget()
+    btn_cidades.place_forget()
+    btn_praia.place_forget()
+    btn_sair.place_forget()
+
+    #ESQUECE A LABEL DO MENU PRINCIPAL
+    lbl_menu.place_forget()
+
+    #INSERE O BOTÃO PARA RETORNAR AO MENU PRINCIPAL
+    btn_retornar_menu.place(x=380,y=10)
+
+#BOTÃO CIDADES
+foto_cidades=ImageTk.PhotoImage(Image.open("cidades.png"))
+btn_cidades=Button(window,text="",width = 220, height = 395,image = foto_cidades,command = dev)
+
+#endregion
+
+#region PRAIAS
+
+def praias():
+
+    #REDIMENSIONAR A JANELA
+    w = 885
+    h = 560
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    window.configure(bg ="lightblue")
+
+    #ESQUECE OS BOTÕES NÃO NECESSÁRIOS
+    btn_guias.place_forget()
+    btn_montanhas.place_forget()
+    btn_cidades.place_forget()
+    btn_praia.place_forget()
+    btn_sair.place_forget()
+
+    #REMOVE A LABEL DO MENU PRINCIPAL
+    lbl_menu.place_forget()
+
+    #INSERE O BOTÃO PARA RETORNAR AO MENU 
+    btn_retornar_praia.place_forget()
+    btn_retornar_menu.place(x=740,y=17)
+
+    #INSERE O NOME DE UTILIZADOR QUE ESTÁ AUTENTICADO
+    user = txt_utilizador.get()
+    lbl_user = Label(window, text= f"Utilizador: {user}",fg="black",font = ("Calibri", 10),width=20,height=1,bg = "lightblue")
+    lbl_user.place(x=10,y=20)
+
+    #TITULO DA JANELA
+    lbl_praias.place(x=442.5,y=60, anchor=CENTER)
+    
+    #BOTÃO DA PRAIA ANSE
+    btn_anse.place(x=55,y=90)
+
+    #REMOVE A IMAGEM E A DESCRIÇÃO DA ANSE
+    lbl_anse.place_forget()
+    desc_anse.place_forget()
+
+    #BOTÃO PRAIA NAVAGIO
+    btn_navagio.place(x=55, y=310)
+
+    #REMOVE A IMAGEM E A DESCRIÇÃO DA NAVAGIO
+    lbl_navagio.place_forget()
+    desc_navagio.place_forget()
+
+    #BOTÃO PRAIA ZLATNI
+    btn_zlatni.place(x=450,y=90)
+
+    #REMOVE A IMAGEM E A DESCRIÇÃO DA ZLATNI
+    lbl_zlatni.place_forget()
+    desc_zlatni.place_forget()
+
+    #BOTÃO PRAIA KAANAPALI
+    btn_kaanapali.place(x=450, y=310)
+
+    #REMOVE A IMAGEM E A DESCRIÇÃO DA KAANAPALI
+    lbl_kaanapali.place_forget()
+    desc_kaanapali.place_forget()
+
+def navagio():
+
+    #REDIMENSIONAR A JANELA
+    w = 885
+    h = 560
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    window.configure(bg ="lightblue")
+
+    #REMOVE OS BOTÕES DAS PRAIAS
+    btn_navagio.place_forget()
+    btn_anse.place_forget()
+    btn_zlatni.place_forget()
+    btn_kaanapali.place_forget()
+
+    #TROCA O BOTÃO MENU POR BOTÃO RETORNAR
+    btn_retornar_menu.place_forget()
+    btn_retornar_praia.place(x=740,y=17)
+
+    #INSERE A IMAGEM
+    lbl_navagio.place(x=445, y=200, anchor = CENTER)
+
+    #DESCRIÇÃO DA PRAIA
+    desc_navagio.place(x=445,y=400, anchor=CENTER)
+
+def anse():
+    #REDIMENSIONAR A JANELA
+    w = 885
+    h = 560
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    #REMOVE OS BOTÕES DAS PRAIAS
+    btn_navagio.place_forget()
+    btn_anse.place_forget()
+    btn_zlatni.place_forget()
+    btn_kaanapali.place_forget()
+
+    #TROCA O BOTÃO MENU POR BOTÃO RETORNAR
+    btn_retornar_menu.place_forget()
+    btn_retornar_praia.place(x=740,y=17)
+
+    #INSERE A IMAGEM
+    lbl_anse.place(x=445, y=200, anchor = CENTER)
+
+    #DESCRIÇÃO DA PRAIA
+    desc_anse.place(x=445,y=400, anchor=CENTER)
+
+def zlatni():
+    #REDIMENSIONAR A JANELA
+    w = 885
+    h = 560
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    #REMOVE OS BOTÕES DAS PRAIAS
+    btn_navagio.place_forget()
+    btn_anse.place_forget()
+    btn_zlatni.place_forget()
+    btn_kaanapali.place_forget()
+
+    #TROCA O BOTÃO MENU POR BOTÃO RETORNAR
+    btn_retornar_menu.place_forget()
+    btn_retornar_praia.place(x=740,y=17)
+
+    #INSERE A IMAGEM
+    lbl_zlatni.place(x=445, y=200, anchor = CENTER)
+
+    #DESCRIÇÃO DA PRAIA
+    desc_zlatni.place(x=445,y=400, anchor=CENTER)
+
+def kaanapali():
+    #REDIMENSIONAR A JANELA
+    w = 885
+    h = 560
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    #REMOVE OS BOTÕES DAS PRAIAS
+    btn_navagio.place_forget()
+    btn_anse.place_forget()
+    btn_zlatni.place_forget()
+    btn_kaanapali.place_forget()
+
+    #TROCA O BOTÃO MENU POR BOTÃO RETORNAR
+    btn_retornar_menu.place_forget()
+    btn_retornar_praia.place(x=740,y=17)
+
+    #INSERE A IMAGEM
+    lbl_kaanapali.place(x=445, y=200, anchor = CENTER)
+
+    #DESCRIÇÃO DA PRAIA
+    desc_kaanapali.place(x=445,y=400, anchor=CENTER)
+
+#BOTÃO PRINCIPAL
+foto_praia=ImageTk.PhotoImage(Image.open("praias.png"))
+btn_praia=Button(window,text="",width = 220, height = 395,image = foto_praia, command = praias)
+
+#BOTÃO RETORNAR PRAIAS
+btn_retornar_praia = Button(window, text="Retornar", fg="black",font = ("Calibri 12 bold"), width=10,height=1, command=praias)
+
+#NAVAGIO
+foto_navagio = ImageTk.PhotoImage(Image.open("navagio.png"))
+btn_navagio = Button(window,text="",width = 375, height = 200,image = foto_navagio,command=navagio)
+lbl_navagio = Label(window,text="",width = 375, height = 200,image = foto_navagio)
+desc_navagio = Label(window,text="Navagio está localizado no noroeste de Zakynthos (Ilha grega). As colinas de alturas variáveis que\nprotegem a baía e a praia dos ventos fortes contribuem para a sua singularidade. A praia é coberta por\nareia macia e limpa de cor creme e uma água bastante clara.", font=("Calibri 14"),bg="lightblue", width = 80, height = 4)
+
+#ANSE
+foto_anse = ImageTk.PhotoImage(Image.open("anse.png"))
+btn_anse = Button(window,text="",width = 375, height = 200,image = foto_anse,command=anse)
+lbl_anse = Label(window,text="",width = 375, height= 200, image=foto_anse)
+desc_anse = Label(window,text="Localizada no extremo oeste de La Digue, Anse Source d'Argent é um autêntico paraíso na terra, uma\nbela praia de areia branca e calmas águas turquesas rodeada por coqueiros e curiosos blocos de granito\nmoldados com o passar do tempo.",font=("Calibri 14"), bg="lightblue", width = 80, height = 4)
+
+#ZLATNI
+foto_zlatni = ImageTk.PhotoImage(Image.open("zlatni.png"))
+btn_zlatni = Button(window,text="",width = 375, height = 200,image = foto_zlatni,command=zlatni)
+lbl_zlatni = Label(window,text="",width = 375, height= 200, image=foto_zlatni)
+desc_zlatni = Label(window,text="Zlatni Rat é uma praia na cidade de Bol, que fica na Ilha de Brač. Um fenômeno natural da região\nformou uma ponta de areia, que parece um chifre, cercado de um mar turquesa maravilhoso.\nPor conta desse visual, a praia ganhou esse nome: Zlatni Rat, que significa\nChifre Dourado, na língua local. ",font=("Calibri 14"), bg="lightblue", width = 80, height = 4)
+
+#KAANAPALI
+foto_kaanapali = ImageTk.PhotoImage(Image.open("Kaanapali.png"))
+btn_kaanapali = Button(window,text="",width = 375, height = 200,image = foto_kaanapali,command=kaanapali)
+lbl_kaanapali = Label(window,text="",width = 375, height= 200, image=foto_kaanapali)
+desc_kaanapali = Label(window,text="Kaanapali Beach em Maui se estende por 3 milhas entre o Hyatt Regency Maui para o sul\ne Sheraton Maui para o norte. Muito tempo atrás, costumava ser um playground para os membros da realeza de Maui\ne hoje esta praia incrível é um dos pontos mais visitados da ilha.",font=("Calibri 14"), bg="lightblue", width = 80, height = 4)
+
+#TITULO: PRAIAS
+lbl_praias = Label(window, text= "PRAIAS",fg = "black", bg="lightblue", font=("Calibri 25 bold"), width = 30, height = 1)
+#endregion
+
+#region ROADTRIPS
+
+#BOTÃO ROADTRIPS
+foto_roadtrips=ImageTk.PhotoImage(Image.open("roadtrips.png"))
+btn_roadtrip=Button(window, text = "", width = 220, height = 395,image = foto_roadtrips)
+
+#endregion
+
+#region TRILHOS E OUTDOORS
+
+#BOTÃO TRILHOS E OUTDOORS
+foto_trilhos=ImageTk.PhotoImage(Image.open("trilhos.png"))
+btn_trilhos=Button(window, text = "",width = 220, height = 395,image = foto_trilhos)
+
+#endregion
+
+JanelaLogin()
 window.mainloop()
