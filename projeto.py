@@ -158,9 +158,9 @@ def CriarConta():
                 messagebox.showerror("Erro","As duas passwords não coincidem.")
 
 #BOTÃO PARA LOGIN E CRIAR CONTA
-btn_login = Button(window, text = "Login", fg = "white", bg="green", font = ("Calibri 12 bold"),width=15,height=1, command = Login)
-btn_criarconta = Button(window, text = "Criar Conta", fg = "white",bg="blue", font = ("Calibri 12 bold"),width=15,height=1, command = JanelaCriar)
-btn_criar = Button(window,text="Criar Conta", fg="white",bg="green", font = ("Calibri 12 bold"), width=15,height=1, command=CriarConta)
+btn_login = Button(window, text = "Login", fg = "white", bg="limegreen", font = ("Calibri 12 bold"),width=15,height=1, command = Login)
+btn_criarconta = Button(window, text = "Criar Conta", fg = "white",bg="royalblue1", font = ("Calibri 12 bold"),width=15,height=1, command = JanelaCriar)
+btn_criar = Button(window,text="Criar Conta", fg="white",bg="lightgreen", font = ("Calibri 12 bold"), width=15,height=1, command=CriarConta)
 
 #UTILIZADOR
 lbl_utilizador=Label(window,text="Utilizador:",fg="black",font=("Times New Roman",14))
@@ -261,7 +261,7 @@ def guias_roteiros():
     y = (hs/2) - (h/2)
     window.geometry('%dx%d+%d+%d' % (w, h, x, y))
     
-    #ESQUECE OS BOTÕES NÃO NECESSÁRIOS
+    #REMOVE OS BOTÕES NÃO NECESSÁRIOS
     btn_guias.place_forget()
     btn_montanhas.place_forget()
     btn_cidades.place_forget()
@@ -269,10 +269,10 @@ def guias_roteiros():
     btn_retornar.place_forget()
     btn_sair.place_forget()
 
-    #ESQUECE A LABEL DO MENU
+    #REMOVE A LABEL DO MENU
     lbl_menu.place_forget()
 
-    #INSERE O BOTÃO PARA RETORNAR AO MENU PRINCIPAL
+    #REMOVE O BOTÃO PARA RETORNAR AO MENU PRINCIPAL
     btn_retornar_menu.place(x=380,y=10)
 
 #BOTÃO GUIAS E ROTEIROS
@@ -293,31 +293,40 @@ def montanhas():
     y = (hs/2) - (h/2)
     window.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
-    window.configure(bg ="lightgrey")
+    window.configure(bg ="#aba8e2")
     
-    #ESQUECE OS BOTÕES NÃO NECESSÁRIOS
+    #REMOVE OS BOTÕES NÃO NECESSÁRIOS
     btn_guias.place_forget()
     btn_montanhas.place_forget()
     btn_cidades.place_forget()
     btn_praia.place_forget()
     btn_sair.place_forget()
 
-    #ESQUECE A LABEL DO MENU PRINCIPAL
+    #REMOVE A LABEL DO MENU PRINCIPAL
     lbl_menu.place_forget()
 
     #INSERE O BOTÃO PARA RETORNAR AO MENU
+    btn_retornar_montanhas.place_forget()
     btn_retornar_menu.place(x=740,y=17)
 
     #INSERE O NOME DE UTILIZADOR QUE ESTÁ AUTENTICADO
     user = txt_utilizador.get()
-    lbl_user = Label(window, text= f"Utilizador: {user}",fg="black",font = ("Calibri", 10),width=20,height=1,bg = "lightgrey")
+    lbl_user = Label(window, text= f"Utilizador: {user}",fg="black",font = ("Calibri bold", 10),width=20,height=1,bg = "#aba8e2")
     lbl_user.place(x=10,y=20)
     
     #BOTÃO KILIMANJARO
     btn_kilimanjaro.place(x=55,y=90)
+    
+    #REMOVE A IMAGEM E A DESCRIÇÃO DA KILIMANJARO
+    desc_kilimanjaro.place_forget()
+    lbl_kilimanjaro.place_forget()
 
     #BOTÃO KIRKJUFELL
     btn_kirkjufell.place(x=55, y=310)
+
+    #REMOVE A IMAGEM E A DESCRIÇÃO DA KIRKJUFELL
+    desc_kirkjufell.place_forget()
+    lbl_kirkjufell.place_forget()
 
     #BOTÃO MATTERHORN
     btn_matterhorn.place(x=450,y=90)
@@ -325,17 +334,79 @@ def montanhas():
     #BOTÃO SERRA DA ESTRELA
     btn_estrela.place(x=450, y=310)
 
+def kilimanjaro():
+
+    #REDIMENSIONAR A JANELA
+    w = 885
+    h = 560
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+
+    #REMOVE OS BOTÕES DAS MONTANHAS
+    btn_kilimanjaro.place_forget()
+    btn_matterhorn.place_forget()
+    btn_kirkjufell.place_forget()
+    btn_estrela.place_forget()
+
+    #TROCA O BOTÃO MENU POR BOTÃO RETORNAR
+    btn_retornar_menu.place_forget()
+    btn_retornar_montanhas.place(x=740,y=17)
+
+    #INSERE A IMAGEM
+    lbl_kilimanjaro.place(x=445, y=200, anchor = CENTER)
+
+    #DESCRIÇÃO DA MONTANHA
+    desc_kilimanjaro.place(x=445,y=400, anchor=CENTER)
+
+def kirkjufell():
+
+    #REDIMENSIONAR A JANELA
+    w = 885
+    h = 560
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    #REMOVE OS BOTÕES DAS MONTANHAS
+    btn_kilimanjaro.place_forget()
+    btn_matterhorn.place_forget()
+    btn_kirkjufell.place_forget()
+    btn_estrela.place_forget()
+
+    #TROCA O BOTÃO MENU POR BOTÃO RETORNAR
+    btn_retornar_menu.place_forget()
+    btn_retornar_montanhas.place(x=740,y=17)
+
+    #INSERE A IMAGEM
+    lbl_kirkjufell.place(x=445, y=200, anchor = CENTER)
+
+    #DESCRIÇÃO DA MONTANHA
+    desc_kirkjufell.place(x=445,y=400, anchor=CENTER)
+
 #BOTÃO MONTANHAS
 foto_montanhas=ImageTk.PhotoImage(Image.open("montanhas.png"))
 btn_montanhas=Button(window,text="",width = 220, height = 395,image = foto_montanhas, command = montanhas)
 
+#BOTÃO RETORNAR MONTANHAS
+btn_retornar_montanhas = Button(window, text="Retornar", fg="black",font = ("Calibri 12 bold"), width=10,height=1, command=montanhas)
+
 #KILIMANJARO
 foto_kilimanjaro = ImageTk.PhotoImage(Image.open("Kilimanjaro.png"))
-btn_kilimanjaro=Button(window,text="",width = 375, height = 200,image = foto_kilimanjaro,command=dev)
+btn_kilimanjaro=Button(window,text="",width = 375, height = 200,image = foto_kilimanjaro,command=kilimanjaro)
+lbl_kilimanjaro = Label(window,text="",width = 375, height = 200,image = foto_kilimanjaro)
+desc_kilimanjaro = Label(window,text="O Parque Nacional do Kilimanjaro já é famoso pelo enorme nome que carrega da famosa montanha da luz,\ntambém conhecida como Kilimanharo.O parque nacional é um dos parques nacionais que se encontram em\num dos países da África Oriental, a Tanzânia. O parque possui a montanha mais alta com neve na África,\nchamada de parque nacional Kilimanjaro. O parque nacional Kilimanjaro está localizado na parte norte da\nTanzânia, logo acima das colinas suaves e do planalto do parque nacional Amboeseli.", font=("Calibri 14"),bg="#aba8e2", width = 85, height = 5)
 
 #KIRKJUFELL
 foto_kirkjufell = ImageTk.PhotoImage(Image.open("Kirkjufell.png"))
-btn_kirkjufell=Button(window,text="",width = 375, height = 200,image = foto_kirkjufell,command=dev)
+btn_kirkjufell=Button(window,text="",width = 375, height = 200,image = foto_kirkjufell,command=kirkjufell)
+lbl_kirkjufell = Label(window,text="",width = 375, height = 200,image = foto_kirkjufell)
+desc_kirkjufell = Label(window,text="Kirkjufell, ou 'Montanha da Igreja', é um pico de formato distinto encontrado na costa norte da Península\nde Snæfellsnes, na Islândia, a apenas uma curta distância da cidade de Grundarfjörður. É frequentemente\nchamada de 'a montanha mais fotografada da Islândia',devido à sua formação dramática\ne localização costeira perfeita.", font=("Calibri 14"),bg="#aba8e2", width = 85, height = 5)
 
 #MATTERHORN
 foto_matterhorn = ImageTk.PhotoImage(Image.open("Matterhorn.png"))
@@ -391,9 +462,9 @@ def praias():
     y = (hs/2) - (h/2)
     window.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
-    window.configure(bg ="lightblue")
+    window.configure(bg ="#025083")
 
-    #ESQUECE OS BOTÕES NÃO NECESSÁRIOS
+    #REMOVE OS BOTÕES NÃO NECESSÁRIOS
     btn_guias.place_forget()
     btn_montanhas.place_forget()
     btn_cidades.place_forget()
@@ -407,9 +478,12 @@ def praias():
     btn_retornar_praia.place_forget()
     btn_retornar_menu.place(x=740,y=17)
 
+    btn_comentar.place_forget()
+    txt_comentario.place_forget()
+
     #INSERE O NOME DE UTILIZADOR QUE ESTÁ AUTENTICADO
     user = txt_utilizador.get()
-    lbl_user = Label(window, text= f"Utilizador: {user}",fg="black",font = ("Calibri", 10),width=20,height=1,bg = "lightblue")
+    lbl_user = Label(window, text= f"Utilizador: {user}",fg="white",font = ("Calibri bold", 10),width=20,height=1,bg = "#025083")
     lbl_user.place(x=10,y=20)
 
     #TITULO DA JANELA
@@ -454,8 +528,6 @@ def navagio():
     y = (hs/2) - (h/2)
     window.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
-    window.configure(bg ="lightblue")
-
     #REMOVE OS BOTÕES DAS PRAIAS
     btn_navagio.place_forget()
     btn_anse.place_forget()
@@ -471,6 +543,8 @@ def navagio():
 
     #DESCRIÇÃO DA PRAIA
     desc_navagio.place(x=445,y=400, anchor=CENTER)
+
+    btn_comentar.place(x=442,y=520,anchor=CENTER)
 
 def anse():
     #REDIMENSIONAR A JANELA
@@ -561,28 +635,28 @@ btn_retornar_praia = Button(window, text="Retornar", fg="black",font = ("Calibri
 foto_navagio = ImageTk.PhotoImage(Image.open("navagio.png"))
 btn_navagio = Button(window,text="",width = 375, height = 200,image = foto_navagio,command=navagio)
 lbl_navagio = Label(window,text="",width = 375, height = 200,image = foto_navagio)
-desc_navagio = Label(window,text="Navagio está localizado no noroeste de Zakynthos (Ilha grega). As colinas de alturas variáveis que\nprotegem a baía e a praia dos ventos fortes contribuem para a sua singularidade. A praia é coberta por\nareia macia e limpa de cor creme e uma água bastante clara.", font=("Calibri 14"),bg="lightblue", width = 80, height = 4)
+desc_navagio = Label(window,text="Navagio está localizado no noroeste de Zakynthos (Ilha grega). As colinas de alturas variáveis que\nprotegem a baía e a praia dos ventos fortes contribuem para a sua singularidade. A praia é coberta por\nareia macia e limpa de cor creme e uma água bastante clara.", font=("Calibri 14"),bg="#025083", fg="white", width = 80, height = 4)
 
 #ANSE
 foto_anse = ImageTk.PhotoImage(Image.open("anse.png"))
 btn_anse = Button(window,text="",width = 375, height = 200,image = foto_anse,command=anse)
 lbl_anse = Label(window,text="",width = 375, height= 200, image=foto_anse)
-desc_anse = Label(window,text="Localizada no extremo oeste de La Digue, Anse Source d'Argent é um autêntico paraíso na terra, uma\nbela praia de areia branca e calmas águas turquesas rodeada por coqueiros e curiosos blocos de granito\nmoldados com o passar do tempo.",font=("Calibri 14"), bg="lightblue", width = 80, height = 4)
+desc_anse = Label(window,text="Localizada no extremo oeste de La Digue, Anse Source d'Argent é um autêntico paraíso na terra, uma\nbela praia de areia branca e calmas águas turquesas rodeada por coqueiros e curiosos blocos de granito\nmoldados com o passar do tempo.",font=("Calibri 14"), bg="#025083", fg="white", width = 80, height = 4)
 
 #ZLATNI
 foto_zlatni = ImageTk.PhotoImage(Image.open("zlatni.png"))
 btn_zlatni = Button(window,text="",width = 375, height = 200,image = foto_zlatni,command=zlatni)
 lbl_zlatni = Label(window,text="",width = 375, height= 200, image=foto_zlatni)
-desc_zlatni = Label(window,text="Zlatni Rat é uma praia na cidade de Bol, que fica na Ilha de Brač. Um fenômeno natural da região\nformou uma ponta de areia, que parece um chifre, cercado de um mar turquesa maravilhoso.\nPor conta desse visual, a praia ganhou esse nome: Zlatni Rat, que significa\nChifre Dourado, na língua local. ",font=("Calibri 14"), bg="lightblue", width = 80, height = 4)
+desc_zlatni = Label(window,text="Zlatni Rat é uma praia na cidade de Bol, que fica na Ilha de Brač. Um fenômeno natural da região\nformou uma ponta de areia, que parece um chifre, cercado de um mar turquesa maravilhoso.\nPor conta desse visual, a praia ganhou esse nome: Zlatni Rat, que significa\nChifre Dourado, na língua local. ",font=("Calibri 14"), bg="#025083", fg="white", width = 80, height = 4)
 
 #KAANAPALI
 foto_kaanapali = ImageTk.PhotoImage(Image.open("Kaanapali.png"))
 btn_kaanapali = Button(window,text="",width = 375, height = 200,image = foto_kaanapali,command=kaanapali)
 lbl_kaanapali = Label(window,text="",width = 375, height= 200, image=foto_kaanapali)
-desc_kaanapali = Label(window,text="Kaanapali Beach em Maui se estende por 3 milhas entre o Hyatt Regency Maui para o sul\ne Sheraton Maui para o norte. Muito tempo atrás, costumava ser um playground para os membros da realeza de Maui\ne hoje esta praia incrível é um dos pontos mais visitados da ilha.",font=("Calibri 14"), bg="lightblue", width = 80, height = 4)
+desc_kaanapali = Label(window,text="Kaanapali Beach em Maui se estende por 3 milhas entre o Hyatt Regency Maui para o sul e Sheraton\nMaui para o norte. Muito tempo atrás, costumava ser um playground para os membros da realeza de\nMaui e hoje esta praia incrível é um dos pontos mais visitados da ilha.",font=("Calibri 14"), bg="#025083", fg="white", width = 80, height = 4)
 
 #TITULO: PRAIAS
-lbl_praias = Label(window, text= "PRAIAS",fg = "black", bg="lightblue", font=("Calibri 25 bold"), width = 30, height = 1)
+lbl_praias = Label(window, text= "PRAIAS",fg = "white", bg="#025083", font=("Calibri 25 bold"), width = 30, height = 1)
 #endregion
 
 #region ROADTRIPS
@@ -598,6 +672,16 @@ btn_roadtrip=Button(window, text = "", width = 220, height = 395,image = foto_ro
 #BOTÃO TRILHOS E OUTDOORS
 foto_trilhos=ImageTk.PhotoImage(Image.open("trilhos.png"))
 btn_trilhos=Button(window, text = "",width = 220, height = 395,image = foto_trilhos)
+
+#endregion
+
+#region GESTÃO DE CATEGORIAS
+def comentar():
+    txt_comentario.place(x=442,y=490, anchor=CENTER)
+    btn_comentar.place_forget()
+
+btn_comentar=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar)
+txt_comentario = Text(window,width=80,height=5)
 
 #endregion
 
