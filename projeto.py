@@ -480,6 +480,7 @@ def praias():
 
     btn_comentar.place_forget()
     txt_comentario.place_forget()
+    btn_submeter.place_forget()
 
     #INSERE O NOME DE UTILIZADOR QUE ESTÁ AUTENTICADO
     user = txt_utilizador.get()
@@ -676,12 +677,15 @@ btn_trilhos=Button(window, text = "",width = 220, height = 395,image = foto_tril
 #endregion
 
 #region GESTÃO DE CATEGORIAS
+
 def comentar():
-    txt_comentario.place(x=442,y=490, anchor=CENTER)
+    txt_comentario.place(x=402,y=490, anchor=CENTER)
     btn_comentar.place_forget()
+    btn_submeter.place(x=795,y=490,anchor=CENTER)
 
 btn_comentar=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar)
 txt_comentario = Text(window,width=80,height=5)
+btn_submeter = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = dev)
 
 #endregion
 
