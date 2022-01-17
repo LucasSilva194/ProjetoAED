@@ -9,6 +9,10 @@ window.title("Gestor de Roteiro de Viagens")
 f = open("basedados.txt","a")
 f.close()
 
+#CRIA UM FICHEIRO CHAMADO comentarios.txt CASO O MESMO NÃO EXISTA
+f = open("comentarios.txt","a")
+f.close()
+
 def dev():
     messagebox.showinfo("ACESSO RESTRITO","Esta página ainda se encontra em desenvolvimento. Pedimos desculpa pelo incómodo causado.")
 
@@ -489,9 +493,17 @@ def praias():
     btn_retornar_praia.place_forget()
     btn_retornar_menu.place(x=740,y=17)
 
-    btn_comentar.place_forget()
+    btn_comentar_anse.place_forget()
+    btn_comentar_zlatni.place_forget()
+    btn_comentar_navagio.place_forget()
+    btn_comentar_kaanapali.place_forget()
+
     txt_comentario.place_forget()
-    btn_submeter.place_forget()
+
+    btn_submeter_anse.place_forget()
+    btn_submeter_zlatni.place_forget()
+    btn_submeter_navagio.place_forget()
+    btn_submeter_kaanapali.place_forget()
 
     #INSERE O NOME DE UTILIZADOR QUE ESTÁ AUTENTICADO
     user = txt_utilizador.get()
@@ -556,7 +568,9 @@ def navagio():
     #DESCRIÇÃO DA PRAIA
     desc_navagio.place(x=445,y=400, anchor=CENTER)
 
-    btn_comentar.place(x=442,y=520,anchor=CENTER)
+    #COMENTÁRIO
+    btn_comentar_navagio.place(x=442,y=520,anchor=CENTER)
+
 
 def anse():
     #REDIMENSIONAR A JANELA
@@ -584,6 +598,9 @@ def anse():
     #DESCRIÇÃO DA PRAIA
     desc_anse.place(x=445,y=400, anchor=CENTER)
 
+    #COMENTÁRIO
+    btn_comentar_anse.place(x=442,y=520,anchor=CENTER)
+
 def zlatni():
     #REDIMENSIONAR A JANELA
     w = 885
@@ -610,6 +627,9 @@ def zlatni():
     #DESCRIÇÃO DA PRAIA
     desc_zlatni.place(x=445,y=400, anchor=CENTER)
 
+    #COMENTÁRIO
+    btn_comentar_zlatni.place(x=442,y=520,anchor=CENTER)
+
 def kaanapali():
     #REDIMENSIONAR A JANELA
     w = 885
@@ -635,6 +655,9 @@ def kaanapali():
 
     #DESCRIÇÃO DA PRAIA
     desc_kaanapali.place(x=445,y=400, anchor=CENTER)
+
+    #COMENTÁRIO
+    btn_comentar_kaanapali.place(x=442,y=520,anchor=CENTER)
 
 #BOTÃO PRINCIPAL
 foto_praia=ImageTk.PhotoImage(Image.open("praias.png"))
@@ -687,33 +710,100 @@ btn_trilhos=Button(window, text = "",width = 220, height = 395,image = foto_tril
 
 #endregion
 
-#region GESTÃO DE CATEGORIAS
+#region GESTÃO DE COMENTÁRIOS
 
-#CRIA UM FICHEIRO CHAMADO comentarios.txt CASO O MESMO NÃO EXISTA
-f = open("comentarios.txt","a")
-f.close()
-
-def comentar():
+#COMENTAR ANSE
+def comentar_anse():
     txt_comentario.place(x=402,y=490, anchor=CENTER)
-    btn_comentar.place_forget()
-    btn_submeter.place(x=795,y=490,anchor=CENTER)
+    btn_comentar_anse.place_forget()
+    btn_submeter_anse.place(x=795,y=490,anchor=CENTER)
 
-def submeter_comentario():
+def submeter_comentario_anse():
 
     comentario = txt_comentario.get("1.0",END)
     user = txt_utilizador.get()
 
     f = open("comentarios.txt","a")
-    f.write(user + ":" + comentario +"\n")
+    f.write("Anse: " + user + ":" + comentario)
+    messagebox.showinfo("Sucesso","O seu comentário foi adicionado com sucesso!")
+    txt_comentario.delete("1.0",END)
+
+    txt_comentario.place_forget()
+    btn_submeter_anse.place_forget()
+    btn_comentar_anse.place(x=442,y=520,anchor=CENTER)
+
+btn_comentar_anse=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar_anse)
+txt_comentario = Text(window,width=80,height=5)
+btn_submeter_anse = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = submeter_comentario_anse)
+
+#COMENTAR ZLATNI
+def comentar_zlatni():
+    txt_comentario.place(x=402,y=490, anchor=CENTER)
+    btn_comentar_zlatni.place_forget()
+    btn_submeter_zlatni.place(x=795,y=490,anchor=CENTER)
+
+def submeter_comentario_zlatni():
+
+    comentario = txt_comentario.get("1.0",END)
+    user = txt_utilizador.get()
+
+    f = open("comentarios.txt","a")
+    f.write("Zlatni: " + user + ":" + comentario)
     messagebox.showinfo("Sucesso","O seu comentário foi adicionado com sucesso!")
 
     txt_comentario.place_forget()
-    btn_submeter.place_forget()
-    btn_comentar.place(x=442,y=520,anchor=CENTER)
+    btn_submeter_zlatni.place_forget()
+    btn_comentar_zlatni.place(x=442,y=520,anchor=CENTER)
 
-btn_comentar=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar)
+btn_comentar_zlatni=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar_zlatni)
 txt_comentario = Text(window,width=80,height=5)
-btn_submeter = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = submeter_comentario)
+btn_submeter_zlatni = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = submeter_comentario_zlatni)
+
+#COMENTAR NAVAGIO
+def comentar_navagio():
+    txt_comentario.place(x=402,y=490, anchor=CENTER)
+    btn_comentar_navagio.place_forget()
+    btn_submeter_navagio.place(x=795,y=490,anchor=CENTER)
+
+def submeter_comentario_navagio():
+
+    comentario = txt_comentario.get("1.0",END)
+    user = txt_utilizador.get()
+
+    f = open("comentarios.txt","a")
+    f.write("Navagio: " + user + ":" + comentario)
+    messagebox.showinfo("Sucesso","O seu comentário foi adicionado com sucesso!")
+
+    txt_comentario.place_forget()
+    btn_submeter_navagio.place_forget()
+    btn_comentar_navagio.place(x=442,y=520,anchor=CENTER)
+
+btn_comentar_navagio=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar_navagio)
+txt_comentario = Text(window,width=80,height=5)
+btn_submeter_navagio = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = submeter_comentario_navagio)
+
+#COMENTAR KAANAPALI
+def comentar_kaanapali():
+    txt_comentario.place(x=402,y=490, anchor=CENTER)
+    btn_comentar_kaanapali.place_forget()
+    btn_submeter_kaanapali.place(x=795,y=490,anchor=CENTER)
+
+def submeter_comentario_kaanapali():
+
+    comentario = txt_comentario.get("1.0",END)
+    user = txt_utilizador.get()
+
+    f = open("comentarios.txt","a")
+    f.write("Kaanapali: " + user + ":" + comentario)
+    messagebox.showinfo("Sucesso","O seu comentário foi adicionado com sucesso!")
+
+    txt_comentario.place_forget()
+    btn_submeter_kaanapali.place_forget()
+    btn_comentar_kaanapali.place(x=442,y=520,anchor=CENTER)
+
+btn_comentar_kaanapali=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar_kaanapali)
+txt_comentario = Text(window,width=80,height=5)
+btn_submeter_kaanapali = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = submeter_comentario_kaanapali)
 
 
 #endregion
