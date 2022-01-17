@@ -25,6 +25,7 @@ def JanelaLogin():
     x = (ws/2) - (w/2)
     y = (hs/2) - (h/2)
     window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+    window.configure(bg ="#F0F0F0")
 
     #INSERE A LABEL E ENTRY DO UTILIZADOR
     lbl_utilizador.place(x=120,y=20)
@@ -45,6 +46,14 @@ def JanelaLogin():
     txt_cpasse.place_forget()
     btn_criar.place_forget()
     btn_retornar.place_forget()
+
+    #REMOVE NÃO NECESSÁRIOS LOGOUT
+    btn_guias.place_forget()
+    btn_montanhas.place_forget()
+    btn_cidades.place_forget()
+    btn_praia.place_forget()
+    btn_sair.place_forget()
+    lbl_menu.place_forget()
 
 #-----------------------FUNÇÃO JANELA DE CRIAR CONTA----------------------#
 def JanelaCriar():
@@ -93,7 +102,7 @@ def Login():
     guardar = user + ";" + password + ";" + "user"
     guardaradmin = user + ";" + password + ";" + "admin"
 
-    #ABRE O FICHEIRO basedados.txt E ADICIONA OS DADOS PARA UMA STRING
+    #ABRE O FICHEIRO basedados.txt E PARA LEITURA
     f = open("basedados.txt","r")
     lista = f.readlines()
 
@@ -105,10 +114,12 @@ def Login():
     else:
         if str(guardaradmin) in str(lista):
            messagebox.showinfo("Bem vindo ADMIN",f"Olá {user}, o seu login foi efetuado com sucesso!")
+           txt_passe.delete(0,"end")
            JanelaApp()
 
         elif str(guardar) in str(lista):
             messagebox.showinfo("Bem vindo",f"Olá {user}, o seu login foi efetuado com sucesso!")
+            txt_passe.delete(0,"end")
             JanelaApp()
         
         #SE OS DADOS ESTIVEREM ERRADOS, RETORNA UM ERRO
@@ -678,14 +689,32 @@ btn_trilhos=Button(window, text = "",width = 220, height = 395,image = foto_tril
 
 #region GESTÃO DE CATEGORIAS
 
+#CRIA UM FICHEIRO CHAMADO comentarios.txt CASO O MESMO NÃO EXISTA
+f = open("comentarios.txt","a")
+f.close()
+
 def comentar():
     txt_comentario.place(x=402,y=490, anchor=CENTER)
     btn_comentar.place_forget()
     btn_submeter.place(x=795,y=490,anchor=CENTER)
 
+def submeter_comentario():
+
+    comentario = txt_comentario.get("1.0",END)
+    user = txt_utilizador.get()
+
+    f = open("comentarios.txt","a")
+    f.write(user + ":" + comentario +"\n")
+    messagebox.showinfo("Sucesso","O seu comentário foi adicionado com sucesso!")
+
+    txt_comentario.place_forget()
+    btn_submeter.place_forget()
+    btn_comentar.place(x=442,y=520,anchor=CENTER)
+
 btn_comentar=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar)
 txt_comentario = Text(window,width=80,height=5)
-btn_submeter = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = dev)
+btn_submeter = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = submeter_comentario)
+
 
 #endregion
 
