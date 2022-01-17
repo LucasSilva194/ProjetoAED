@@ -5,12 +5,14 @@ from PIL import ImageTk, Image
 window = Tk()
 window.title("Gestor de Roteiro de Viagens")
 
-#CRIA UM FICHEIRO CHAMADO basedados.txt CASO O MESMO NÃO EXISTA
+#CRIAÇÃO DE FICHEIROS 
 f = open("basedados.txt","a")
 f.close()
 
-#CRIA UM FICHEIRO CHAMADO comentarios.txt CASO O MESMO NÃO EXISTA
 f = open("comentarios.txt","a")
+f.close()
+
+f = open("classificacoes.txt","a")
 f.close()
 
 def dev():
@@ -493,6 +495,7 @@ def praias():
     btn_retornar_praia.place_forget()
     btn_retornar_menu.place(x=740,y=17)
 
+    #REMOVE OS BOTÕES DE COMENTÁRIO
     btn_comentar_anse.place_forget()
     btn_comentar_zlatni.place_forget()
     btn_comentar_navagio.place_forget()
@@ -504,6 +507,12 @@ def praias():
     btn_submeter_zlatni.place_forget()
     btn_submeter_navagio.place_forget()
     btn_submeter_kaanapali.place_forget()
+
+    #REMOVE OS BOTÕES DE GOSTO
+    btn_gosto_anse.place_forget()
+    btn_gosto_zlatni.place_forget()
+    btn_gosto_navagio.place_forget()
+    btn_gosto_kaanapali.place_forget()
 
     #INSERE O NOME DE UTILIZADOR QUE ESTÁ AUTENTICADO
     user = txt_utilizador.get()
@@ -569,8 +578,10 @@ def navagio():
     desc_navagio.place(x=445,y=400, anchor=CENTER)
 
     #COMENTÁRIO
-    btn_comentar_navagio.place(x=442,y=520,anchor=CENTER)
+    btn_comentar_navagio.place(x=502,y=520,anchor=CENTER)
 
+    #GOSTO
+    btn_gosto_navagio.place(x=372,y=520,anchor=CENTER)
 
 def anse():
     #REDIMENSIONAR A JANELA
@@ -599,7 +610,10 @@ def anse():
     desc_anse.place(x=445,y=400, anchor=CENTER)
 
     #COMENTÁRIO
-    btn_comentar_anse.place(x=442,y=520,anchor=CENTER)
+    btn_comentar_anse.place(x=502,y=520,anchor=CENTER)
+
+    #GOSTO
+    btn_gosto_anse.place(x=372,y=520,anchor=CENTER)
 
 def zlatni():
     #REDIMENSIONAR A JANELA
@@ -628,7 +642,10 @@ def zlatni():
     desc_zlatni.place(x=445,y=400, anchor=CENTER)
 
     #COMENTÁRIO
-    btn_comentar_zlatni.place(x=442,y=520,anchor=CENTER)
+    btn_comentar_zlatni.place(x=502,y=520,anchor=CENTER)
+
+    #GOSTO
+    btn_gosto_zlatni.place(x=372,y=520,anchor=CENTER)
 
 def kaanapali():
     #REDIMENSIONAR A JANELA
@@ -657,7 +674,10 @@ def kaanapali():
     desc_kaanapali.place(x=445,y=400, anchor=CENTER)
 
     #COMENTÁRIO
-    btn_comentar_kaanapali.place(x=442,y=520,anchor=CENTER)
+    btn_comentar_kaanapali.place(x=502,y=520,anchor=CENTER)
+
+    #GOSTO
+    btn_gosto_kaanapali.place(x=372,y=520,anchor=CENTER)
 
 #BOTÃO PRINCIPAL
 foto_praia=ImageTk.PhotoImage(Image.open("praias.png"))
@@ -692,6 +712,7 @@ desc_kaanapali = Label(window,text="Kaanapali Beach em Maui se estende por 3 mil
 
 #TITULO: PRAIAS
 lbl_praias = Label(window, text= "PRAIAS",fg = "white", bg="#025083", font=("Calibri 25 bold"), width = 30, height = 1)
+
 #endregion
 
 #region ROADTRIPS
@@ -805,6 +826,55 @@ btn_comentar_kaanapali=Button(window, text="Adicionar comentário",fg="black", f
 txt_comentario = Text(window,width=80,height=5)
 btn_submeter_kaanapali = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = submeter_comentario_kaanapali)
 
+#endregion
+
+#region CLASSIFICAÇÕES
+
+def gosto_anse():
+    f = open("classificacoes.txt","a")
+    f.write("Anse" + "\n")
+    
+    f= open("classificacoes.txt","r")
+    encontrar = f.read()
+    num = encontrar.count("Anse")
+
+    messagebox.showinfo("Sucesso!",f"A sua classificação foi adicionada com sucesso! Esta praia já tem {num} gosto(s).")
+
+def gosto_zlatni():
+    f = open("classificacoes.txt","a")
+    f.write("Zlatni" + "\n")
+    
+    f= open("classificacoes.txt","r")
+    encontrar = f.read()
+    num = encontrar.count("Zlatni")
+
+    messagebox.showinfo("Sucesso!",f"A sua classificação foi adicionada com sucesso! Esta praia já tem {num} gosto(s).")
+
+def gosto_navagio():
+    f = open("classificacoes.txt","a")
+    f.write("Navagio" + "\n")
+    
+    f= open("classificacoes.txt","r")
+    encontrar = f.read()
+    num = encontrar.count("Navagio")
+
+    messagebox.showinfo("Sucesso!",f"A sua classificação foi adicionada com sucesso! Esta praia já tem {num} gosto(s).")
+
+def gosto_kaanapali():
+    f = open("classificacoes.txt","a")
+    f.write("Kaanapali" + "\n")
+    
+    f= open("classificacoes.txt","r")
+    encontrar = f.read()
+    num = encontrar.count("Kaanapali")
+
+    messagebox.showinfo("Sucesso!",f"A sua classificação foi adicionada com sucesso! Esta praia já tem {num} gosto(s).")
+
+#BOTÕES
+btn_gosto_anse=Button(window, text="Gosto",fg="green", font = ("Calibri bold", 12),width=6,height=1, command = gosto_anse)
+btn_gosto_zlatni=Button(window, text="Gosto",fg="green", font = ("Calibri bold", 12),width=5,height=1, command = gosto_zlatni)
+btn_gosto_navagio=Button(window, text="Gosto",fg="green", font = ("Calibri bold", 12),width=5,height=1, command = gosto_navagio)
+btn_gosto_kaanapali=Button(window, text="Gosto",fg="green", font = ("Calibri bold", 12),width=5,height=1, command = gosto_kaanapali)
 
 #endregion
 
