@@ -737,6 +737,7 @@ btn_trilhos=Button(window, text = "",width = 220, height = 395,image = foto_tril
 def comentar_anse():
     txt_comentario.place(x=402,y=490, anchor=CENTER)
     btn_comentar_anse.place_forget()
+    btn_gosto_anse.place_forget()
     btn_submeter_anse.place(x=795,y=490,anchor=CENTER)
 
 def submeter_comentario_anse():
@@ -761,6 +762,7 @@ btn_submeter_anse = Button(window, text="Submeter",fg="black", font = ("Calibri 
 def comentar_zlatni():
     txt_comentario.place(x=402,y=490, anchor=CENTER)
     btn_comentar_zlatni.place_forget()
+    btn_gosto_zlatni.place_forget()
     btn_submeter_zlatni.place(x=795,y=490,anchor=CENTER)
 
 def submeter_comentario_zlatni():
@@ -784,6 +786,7 @@ btn_submeter_zlatni = Button(window, text="Submeter",fg="black", font = ("Calibr
 def comentar_navagio():
     txt_comentario.place(x=402,y=490, anchor=CENTER)
     btn_comentar_navagio.place_forget()
+    btn_gosto_navagio.place_forget()
     btn_submeter_navagio.place(x=795,y=490,anchor=CENTER)
 
 def submeter_comentario_navagio():
@@ -807,6 +810,7 @@ btn_submeter_navagio = Button(window, text="Submeter",fg="black", font = ("Calib
 def comentar_kaanapali():
     txt_comentario.place(x=402,y=490, anchor=CENTER)
     btn_comentar_kaanapali.place_forget()
+    btn_gosto_kaanapali.place_forget()
     btn_submeter_kaanapali.place(x=795,y=490,anchor=CENTER)
 
 def submeter_comentario_kaanapali():
