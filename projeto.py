@@ -1,3 +1,4 @@
+from cgitb import text
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
@@ -508,6 +509,8 @@ def praias():
     btn_submeter_navagio.place_forget()
     btn_submeter_kaanapali.place_forget()
 
+    btn_ver_anse.place_forget()
+
     #REMOVE OS BOTÕES DE GOSTO
     btn_gosto_anse.place_forget()
     btn_gosto_zlatni.place_forget()
@@ -610,10 +613,11 @@ def anse():
     desc_anse.place(x=445,y=400, anchor=CENTER)
 
     #COMENTÁRIO
-    btn_comentar_anse.place(x=502,y=520,anchor=CENTER)
+    btn_comentar_anse.place(x=414,y=520,anchor=CENTER)
+    btn_ver_anse.place(x=572, y=520, anchor = CENTER)
 
     #GOSTO
-    btn_gosto_anse.place(x=372,y=520,anchor=CENTER)
+    btn_gosto_anse.place(x=292,y=520,anchor=CENTER)
 
 def zlatni():
     #REDIMENSIONAR A JANELA
@@ -754,9 +758,34 @@ def submeter_comentario_anse():
     btn_submeter_anse.place_forget()
     btn_comentar_anse.place(x=442,y=520,anchor=CENTER)
 
+def ver_cmt_anse():
+    f = open("comentarios.txt","r")
+    linhas = f.readlines()
+    anse = []
+    for i in linhas:
+        if str("Anse") in i:
+            anse.append(i)
+    if anse == []:
+        messagebox.showerror("ERRO", "Não existem comentários.")
+    else:
+        JanComentarios = Toplevel(window)
+        JanComentarios.title("Comentários Anse")
+
+        w = 500
+        h = 300
+        ws = JanComentarios.winfo_screenwidth()
+        hs = JanComentarios.winfo_screenheight()
+        x = (ws/2) - (w/2)
+        y = (hs/2) - (h/2)
+        JanComentarios.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+        lbl_cmt_anse= Label(JanComentarios,width=60, height=3,text=anse)
+        lbl_cmt_anse.place(x=250,y=150,anchor=CENTER)
+        
 btn_comentar_anse=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar_anse)
 txt_comentario = Text(window,width=80,height=5)
 btn_submeter_anse = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = submeter_comentario_anse)
+btn_ver_anse=Button(window, text="Ver comentários",fg="black", font = ("Calibri bold", 12),width=15,height=1, command = ver_cmt_anse)
 
 #COMENTAR ZLATNI
 def comentar_zlatni():
