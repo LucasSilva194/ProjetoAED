@@ -120,9 +120,9 @@ def Login():
     #CASO OS DADOS DE ACESSO ESTEJAM CORRETOS, EFETUA LOGIN
     else:
         if str(guardaradmin) in str(lista):
-           messagebox.showinfo("Bem vindo ADMIN",f"Olá {user}, o seu login foi efetuado com sucesso!")
+           messagebox.showinfo("Bem vindo ADMINISTRADOR",f"Olá {user}! Está autenticado como ADMIN")
            txt_passe.delete(0,"end")
-           JanelaApp()
+           JanelaAppAdmin()
 
         elif str(guardar) in str(lista):
             messagebox.showinfo("Bem vindo",f"Olá {user}, o seu login foi efetuado com sucesso!")
@@ -174,6 +174,112 @@ def CriarConta():
                 JanelaLogin()
             else:
                 messagebox.showerror("Erro","As duas passwords não coincidem.")
+
+def JanelaCriarAdmin():
+    JanCriarAdmin = Toplevel(window)
+    JanCriarAdmin.title("Adicionar Utilizadores Utilizador")
+
+    w = 450
+    h = 230
+    ws = JanCriarAdmin.winfo_screenwidth()
+    hs = JanCriarAdmin.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    JanCriarAdmin.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    #UTILIZADOR
+    lbl_utilizador=Label(JanCriarAdmin,text="Utilizador:",fg="black",font=("Times New Roman",14))
+    txt_utilizador=Entry(JanCriarAdmin,width=30)
+    lbl_utilizador.place(x=30,y=20)
+    txt_utilizador.place(x=230,y=22)
+
+    #EMAIL
+    lbl_email=Label(JanCriarAdmin,text="Email:",fg="black",font=("Times New Roman",14))
+    txt_email=Entry(JanCriarAdmin, width=30)
+    lbl_email.place(x=30,y=50)
+    txt_email.place(x=230,y=53)
+
+    #PASSWORD
+    lbl_passe=Label(JanCriarAdmin,text="Palavra-Passe:",fg="black",font=("Times New Roman",14))
+    txt_passe=Entry(JanCriarAdmin,width=30,show="*")
+    lbl_passe.place(x=30,y=80)
+    txt_passe.place(x=230,y=83)
+
+    #CONFIRMAR PASSOWRD
+    lbl_cpasse=Label(JanCriarAdmin,text="Confirmar Palavra-Passe:",fg="black",font=("Times New Roman",14))
+    txt_cpasse=Entry(JanCriarAdmin, width=30,show="*")
+    lbl_cpasse.place(x=30,y=110)
+    txt_cpasse.place(x=230,y=113)
+
+    #CHECKBUTTON USER OU ADMIN
+    cb1 = IntVar()
+    cb1.set(1)
+    cb2 = IntVar()
+
+    cb1_utilizador = Checkbutton(JanCriarAdmin, text="Utilizador", variable = cb1)
+    cb2_utilizador = Checkbutton(JanCriarAdmin,text="Administrador",variable=cb2)
+        
+    cb1_utilizador.place(x=70, y=150)
+    cb2_utilizador.place(x=70, y=180)
+
+    def CriarContaAdmin():
+        #BUSCA OS DADOS DE ACESSO (UTILIZADOR, PASSWORD E EMAIL)
+        utilizador = txt_utilizador.get()
+        password = txt_passe.get()
+        email = txt_email.get()
+        cpassword = txt_cpasse.get()
+
+        #GUARDA OS DADOS DE ACESSO INSERIDOS PARA UMA STRING
+        guardar = utilizador + ";" + password + ";" + email
+
+        #ABRE O FICHEIRO basedados.txt PARA LEITURA
+        f = open("basedados.txt","r")
+
+        #CASO ALGUM DOS CAMPOS ESTEJA VAZIO, RETORNA UM ERRO
+        if utilizador == "" or email == "" or password == "" or cpassword == "":
+            messagebox.showerror("Erro","Por favor forneça todos os dados corretamente.")
+            JanCriarAdmin.attributes("-topmost",True)
+
+        #SE OS CAMPOS UTILIZADOR E PALAVRA-PASSE ESTIVEREM PREENCHIDOS, ADICIONA OS DADOS DO FICHEIRO basedados.txt PARA UMA STRING
+        if utilizador != "" and password != "":
+            lista = f.readlines()
+
+            #VERIFICA SE OS DADOS JÁ SE ENCONTRAM NO FICHEIRO
+            if str(guardar) in str(lista):
+                messagebox.showerror("Erro","Já existe uma conta com esses dados, por favor efetue login.")
+                JanCriarAdmin.attributes("-topmost",True)
+
+            #VERIFICA SE O NOME DE UTILIZADOR JÁ ESTÁ EM USO 
+            elif str(utilizador) in str(lista):
+                messagebox.showerror("Erro","Esse utilizador já existe.")
+                JanCriarAdmin.attributes("-topmost",True)
+
+            #SE A PALAVRA-PASSE FOR CONFIRMADA CORRETAMENTE CRIA A CONTA  
+            else:
+                if password == cpassword:
+                    if cb1.get() == 1 and cb2.get() == 0:
+                        f = open("basedados.txt","a")
+                        f.write(utilizador + ";" + password + ";" + "user" + ";" + email + "\n")
+                        messagebox.showinfo("Sucesso","A sua conta de UTILIZADOR foi criada com sucesso!")
+                        JanelaAppAdmin()
+                        JanCriarAdmin.quit()
+                    elif cb2.get() == 1 and cb1.get() == 0:
+                        f = open("basedados.txt","a")
+                        f.write(utilizador + ";" + password + ";" + "admin" + ";" + email + "\n")
+                        messagebox.showinfo("Sucesso","A sua conta de ADMINISTRADOR foi criada com sucesso!")
+                        JanelaAppAdmin()
+                        JanCriarAdmin.quit()
+                    elif cb1.get() == 1 and cb2.get() == 1:
+                        messagebox.showerror("Erro","Por favor selecione apenas uma das opções: UTILIZADOR ou ADMINISTRADOR.")
+                        
+                else:
+                    messagebox.showerror("Erro","As duas passwords não coincidem.")
+                    JanCriarAdmin.attributes("-topmost",True)
+
+    #BOTÃO CRIAR
+    btn_criar = Button(JanCriarAdmin,text="Criar Conta", fg="white",bg="lightgreen", font = ("Calibri 12 bold"), width=15,height=1, command=CriarContaAdmin)
+    btn_criar.place(x=240,y=160)
+
 
 #BOTÃO PARA LOGIN E CRIAR CONTA
 btn_login = Button(window, text = "Login", fg = "white", bg="limegreen", font = ("Calibri 12 bold"),width=15,height=1, command = Login)
@@ -254,6 +360,88 @@ def JanelaApp():
     btn_montanhas.place(x=260,y=100)
     btn_cidades.place(x=490,y=100)
     btn_praia.place(x=720,y=100)
+
+#LABEL MENU PRINCIPAL
+lbl_menu = Label(window, text="MENU PRINCIPAL",fg = "black", bg="white", font=("Calibri 25 bold"), width = 30, height = 1)
+
+#BOTÃO SAIR
+btn_sair = Button(window, text = "SAIR", fg = "red", font = ("Calibri", 12),width=10,height=1, command = window.quit)
+
+#BOTÃO RETORNAR MENU
+btn_retornar_menu = Button(window, text="Menu", fg="black",font = ("Calibri 12 bold"), width=10,height=1, command=JanelaApp)
+
+#endregion
+
+#region JANELA DA APP ADMIN
+def JanelaAppAdmin():
+
+    #REMOVE OS BOTÕES NÃO NECESSÁRIOS DE INICIO DE SESSÃO
+    btn_login.place_forget()
+    btn_criarconta.place_forget()
+    btn_retornar_menu.place_forget()
+
+    #REMOVE OS BOTÕES DAS PRAIAS
+    btn_kaanapali.place_forget()
+    btn_anse.place_forget()
+    btn_navagio.place_forget()
+    btn_zlatni.place_forget()
+
+    #REMOVE BOTÕES DAS MONTANHAS
+    btn_kilimanjaro.place_forget()
+    btn_kirkjufell.place_forget()
+    btn_matterhorn.place_forget()
+    btn_estrela.place_forget()
+
+    #REMOVE AS LABELS E ENTRIES NÃO NECESSÁRIAS
+    lbl_passe.place_forget()
+    lbl_utilizador.place_forget()
+    lbl_praias.place_forget()
+    txt_utilizador.place_forget()
+    txt_passe.place_forget()
+
+    #INSERE O NOME DE UTILIZADOR QUE ESTÁ AUTENTICADO
+    user = txt_utilizador.get()
+    lbl_user = Label(window, text= f"Utilizador: {user}",fg="black",font = ("Calibri", 10),width=20,height=1,bg = "white")
+    lbl_user.place(x=10,y=20)
+
+    #INSERE O TITULO DA PÁGINA
+    lbl_menu.place(x=490, y=60,anchor=CENTER)
+
+    #BOTÃO PARA FECHAR TUDO
+    btn_sair.place(x=856, y=10)
+
+    #INSERE OS BOTÕES DE GUIAS, MONTANHAS, CIDADES E PRAIAS
+    btn_guias.place(x=30,y=100)
+    btn_montanhas.place(x=260,y=100)
+    btn_cidades.place(x=490,y=100)
+    btn_praia.place(x=720,y=100)
+
+    #BARRA MENU ADMIN
+    barra_admin = Menu(window)
+
+    utilizadores_Menu = Menu(barra_admin)
+    utilizadores_Menu.add_command(label="Adicionar Utilizadores", command=JanelaCriarAdmin)
+    utilizadores_Menu.add_command(label="Remover Utilizadores", command=dev)
+    barra_admin.add_cascade(label="Utilizadores", menu=utilizadores_Menu)
+
+    categorias_menu = Menu(barra_admin)
+    categorias_menu.add_command(label = "Alterar Categorias",command=dev)
+    barra_admin.add_cascade(label = "Categorias", menu=categorias_menu)
+
+    ordenar_menu = Menu(barra_admin)
+    ordenar_menu.add_command(label="Mais Popular", command = dev)
+    ordenar_menu.add_command(label="Mais Comentada", command = dev)
+    barra_admin.add_cascade(label="Ordenar", menu=ordenar_menu)
+
+    #REDIMENSIONAR A JANELA
+    w = 980
+    h = 550
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+    window.configure(bg ="white", menu=barra_admin)
 
 #LABEL MENU PRINCIPAL
 lbl_menu = Label(window, text="MENU PRINCIPAL",fg = "black", bg="white", font=("Calibri 25 bold"), width = 30, height = 1)
@@ -723,7 +911,7 @@ lbl_praias = Label(window, text= "PRAIAS",fg = "white", bg="#025083", font=("Cal
 
 #BOTÃO ROADTRIPS
 foto_roadtrips=ImageTk.PhotoImage(Image.open("roadtrips.png"))
-btn_roadtrip=Button(window, text = "", width = 220, height = 395,image = foto_roadtrips)
+btn_roadtrip=Button(window, text = "", width = 220, height = 395,image = foto_roadtrips, command=dev)
 
 #endregion
 
@@ -731,7 +919,7 @@ btn_roadtrip=Button(window, text = "", width = 220, height = 395,image = foto_ro
 
 #BOTÃO TRILHOS E OUTDOORS
 foto_trilhos=ImageTk.PhotoImage(Image.open("trilhos.png"))
-btn_trilhos=Button(window, text = "",width = 220, height = 395,image = foto_trilhos)
+btn_trilhos=Button(window, text = "",width = 220, height = 395,image = foto_trilhos,command=dev)
 
 #endregion
 
