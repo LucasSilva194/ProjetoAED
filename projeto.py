@@ -1,3 +1,4 @@
+from ast import Delete
 from cgitb import text
 from tkinter import *
 from tkinter import messagebox
@@ -177,7 +178,7 @@ def CriarConta():
 
 def JanelaCriarAdmin():
     JanCriarAdmin = Toplevel(window)
-    JanCriarAdmin.title("Adicionar Utilizadores Utilizador")
+    JanCriarAdmin.title("Adicionar Utilizadores")
 
     w = 450
     h = 230
@@ -280,6 +281,53 @@ def JanelaCriarAdmin():
     btn_criar = Button(JanCriarAdmin,text="Criar Conta", fg="white",bg="lightgreen", font = ("Calibri 12 bold"), width=15,height=1, command=CriarContaAdmin)
     btn_criar.place(x=240,y=160)
 
+def removerUtilizador():
+    JanRemover = Toplevel(window)
+    JanRemover.title("Remover Utilizadores")
+
+    w = 450
+    h = 230
+    ws = JanRemover.winfo_screenwidth()
+    hs = JanRemover.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    JanRemover.geometry('%dx%d+%d+%d' % (w, h, x, y))
+    
+    #UTILIZADOR
+    lbl_utilizador=Label(JanRemover,text="Utilizador:",fg="black",font=("Times New Roman",14))
+    txt_utilizador=Entry(JanRemover,width=30)
+    lbl_utilizador.place(x=30,y=20)
+    txt_utilizador.place(x=230,y=22)
+
+    #EMAIL
+    lbl_email=Label(JanRemover,text="Email:",fg="black",font=("Times New Roman",14))
+    txt_email=Entry(JanRemover, width=30)
+    lbl_email.place(x=30,y=50)
+    txt_email.place(x=230,y=53)
+
+    def removerUser():
+
+        f = open("basedados.txt","r")
+        lista = f.readlines()
+        f.close()
+        #BUSCA OS DADOS DE ACESSO
+        utilizador = txt_utilizador.get()
+        email = txt_email.get()
+
+        if utilizador !="" and email != "":
+            
+            nf = open("basedados.txt","w")
+            for linha in lista:
+                if linha != utilizador:
+                    print(linha)
+                    nf.write(linha)
+            nf.close()
+        else:
+            messagebox.showerror("Erro","Por favor introduza os dados corretamente.")
+
+    #BOTÃO REMOVER
+    btn_removerUser = Button(JanRemover,text="Remover User", fg="white",bg="red", font = ("Calibri 12 bold"), width=15,height=1, command=removerUser)
+    btn_removerUser.place(x=240,y=160)
 
 #BOTÃO PARA LOGIN E CRIAR CONTA
 btn_login = Button(window, text = "Login", fg = "white", bg="limegreen", font = ("Calibri 12 bold"),width=15,height=1, command = Login)
@@ -410,22 +458,100 @@ def JanelaAppAdmin():
     #BOTÃO PARA FECHAR TUDO
     btn_sair.place(x=856, y=10)
 
-    #INSERE OS BOTÕES DE GUIAS, MONTANHAS, CIDADES E PRAIAS
-    btn_guias.place(x=30,y=100)
-    btn_montanhas.place(x=260,y=100)
-    btn_cidades.place(x=490,y=100)
-    btn_praia.place(x=720,y=100)
+    #INSERE OS BOTÕES DAS CATEGORIAS
+
+    if chk_g.get() == 1:
+        btn_guias.place(x=30,y=100)
+    else:
+        btn_guias.place_forget()
+
+    if chk_m.get() == 1:
+        btn_montanhas.place(x=260,y=100)
+    else:
+        btn_montanhas.place_forget()
+
+    if chk_c.get() == 1:
+        btn_cidades.place(x=490,y=100)
+    else:
+        btn_cidades.place_forget()
+
+    if chk_p.get() == 1:
+        btn_praia.place(x=720,y=100)
+    else:
+        btn_praia.place_forget()
+
+    if chk_r.get() == 1 and chk_g.get() == 0:
+        btn_roadtrip.place(x=30,y=100)
+        btn_guias.place_forget()
+    elif chk_r.get() == 1 and chk_m.get() == 0:
+        btn_roadtrip.place(x=260,y=100)
+        btn_montanhas.place_forget()
+    elif chk_r.get() == 1 and chk_c.get() == 0:
+        btn_roadtrip.place(x=490,y=100)
+        btn_cidades.place_forget()
+    elif chk_r.get() == 1 and chk_p.get() == 0:
+        btn_roadtrip.place(x=720,y=100)
+        btn_praia.place_forget()
+    else:
+        btn_roadtrip.place_forget()
+
+    if chk_t.get() == 1 and chk_g.get() == 0:
+        btn_trilhos.place(x=30,y=100)
+        btn_guias.place_forget()
+    elif chk_t.get() == 1 and chk_m.get() == 0:
+        btn_trilhos.place(x=260,y=100)
+        btn_montanhas.place_forget()
+    elif chk_t.get() == 1 and chk_c.get() == 0:
+        btn_trilhos.place(x=490,y=100)
+        btn_cidades.place_forget()
+    elif chk_t.get() == 1 and chk_p.get() == 0:
+        btn_trilhos.place(x=720,y=100)
+        btn_praia.place_forget()
+    else:
+        btn_trilhos.place_forget()
+
+    if chk_r.get() == 1 and chk_t.get() == 1:
+        if chk_g.get() == 0 and chk_m.get() == 0:
+            btn_roadtrip.place(x=30,y=100)
+            btn_guias.place_forget()
+            btn_trilhos.place(x=260,y=100)
+            btn_montanhas.place_forget()
+        elif chk_g.get() == 0 and chk_c.get() == 0:
+            btn_roadtrip.place(x=30,y=100)
+            btn_guias.place_forget()
+            btn_trilhos.place(x=490,y=100)
+            btn_cidades.place_forget()
+        elif chk_g.get() == 0 and chk_p.get() == 0:
+            btn_roadtrip.place(x=30,y=100)
+            btn_guias.place_forget()
+            btn_trilhos.place(x=720,y=100)
+            btn_praia.place_forget()
+        elif chk_m.get() == 0 and chk_c.get() == 0:
+            btn_roadtrip.place(x=260,y=100)
+            btn_montanhas.place_forget()
+            btn_trilhos.place(x=490,y=100)
+            btn_cidades.place_forget()
+        elif chk_m.get() == 0 and chk_p.get() == 0:
+            btn_roadtrip.place(x=260,y=100)
+            btn_montanhas.place_forget()
+            btn_trilhos.place(x=720,y=100)
+            btn_praia.place_forget()
+        elif chk_c.get() == 0 and chk_p.get() == 0:
+            btn_roadtrip.place(x=490,y=100)
+            btn_cidades.place_forget()
+            btn_trilhos.place(x=720,y=100)
+            btn_praia.place_forget()
 
     #BARRA MENU ADMIN
     barra_admin = Menu(window)
 
     utilizadores_Menu = Menu(barra_admin)
     utilizadores_Menu.add_command(label="Adicionar Utilizadores", command=JanelaCriarAdmin)
-    utilizadores_Menu.add_command(label="Remover Utilizadores", command=dev)
+    utilizadores_Menu.add_command(label="Remover Utilizadores", command=removerUtilizador)
     barra_admin.add_cascade(label="Utilizadores", menu=utilizadores_Menu)
 
     categorias_menu = Menu(barra_admin)
-    categorias_menu.add_command(label = "Alterar Categorias",command=dev)
+    categorias_menu.add_command(label = "Alterar Categorias",command=escolha_categorias)
     barra_admin.add_cascade(label = "Categorias", menu=categorias_menu)
 
     ordenar_menu = Menu(barra_admin)
@@ -656,7 +782,6 @@ btn_cidades=Button(window,text="",width = 220, height = 395,image = foto_cidades
 #endregion
 
 #region PRAIAS
-
 def praias():
 
     #REDIMENSIONAR A JANELA
@@ -1096,6 +1221,53 @@ btn_gosto_anse=Button(window, text="Gosto",fg="green", font = ("Calibri bold", 1
 btn_gosto_zlatni=Button(window, text="Gosto",fg="green", font = ("Calibri bold", 12),width=5,height=1, command = gosto_zlatni)
 btn_gosto_navagio=Button(window, text="Gosto",fg="green", font = ("Calibri bold", 12),width=5,height=1, command = gosto_navagio)
 btn_gosto_kaanapali=Button(window, text="Gosto",fg="green", font = ("Calibri bold", 12),width=5,height=1, command = gosto_kaanapali)
+
+#endregion
+
+#region GESTÃO DE CATEGORIAS
+
+chk_g = IntVar()
+chk_g.set(1)
+chk_m = IntVar()
+chk_m.set(1)
+chk_c = IntVar()
+chk_c.set(1)
+chk_p = IntVar()
+chk_p.set(1)
+chk_r = IntVar()
+chk_t = IntVar()
+
+def escolha_categorias():
+    JanEscolha = Toplevel(window)
+    JanEscolha.title("Escolha de Categorias")
+
+    w = 450
+    h = 230
+    ws = JanEscolha.winfo_screenwidth()
+    hs = JanEscolha.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    JanEscolha.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    lbl_escolha = Label(JanEscolha, text="Escolha as 4 Categorias que deseja:",font=("Calibri 11 bold"),width=40,height=1)
+    lbl_escolha.place(x=225,y=25,anchor=CENTER)
+
+    chk_guias = Checkbutton(JanEscolha, text="Guias e Roteiros", variable = chk_g)
+    chk_montanhas = Checkbutton(JanEscolha, text="Montanhas", variable = chk_m)
+    chk_cidades = Checkbutton(JanEscolha, text="Cidades", variable = chk_c)
+    chk_praias = Checkbutton(JanEscolha, text="Praias", variable = chk_p)
+    chk_roadtrips = Checkbutton(JanEscolha, text="Roadtrips", variable = chk_r)
+    chk_trilhos = Checkbutton(JanEscolha, text="Trilhos e Outdoors", variable = chk_t)
+
+    chk_guias.place(x=90, y=50)
+    chk_montanhas.place(x=90,y=70)
+    chk_cidades.place(x=90,y=90)
+    chk_praias.place(x=250,y=50)
+    chk_roadtrips.place(x=250,y=70)
+    chk_trilhos.place(x=250,y=90)
+        
+    btn_confirmar=Button(JanEscolha,text="Confirmar",bg="green",font = ("Calibri 12 bold"),fg="white",width=10,height=1,command=JanelaAppAdmin)
+    btn_confirmar.place(x=225,y=190,anchor=CENTER)
 
 #endregion
 
