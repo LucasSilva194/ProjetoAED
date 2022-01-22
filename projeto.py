@@ -1,5 +1,3 @@
-from ast import Delete
-from cgitb import text
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
@@ -176,6 +174,7 @@ def CriarConta():
             else:
                 messagebox.showerror("Erro","As duas passwords não coincidem.")
 
+#-----------------FUNÇÃO JANELA DE CRIAR CONTA ADMIN----------------------#
 def JanelaCriarAdmin():
     JanCriarAdmin = Toplevel(window)
     JanCriarAdmin.title("Adicionar Utilizadores")
@@ -281,6 +280,7 @@ def JanelaCriarAdmin():
     btn_criar = Button(JanCriarAdmin,text="Criar Conta", fg="white",bg="lightgreen", font = ("Calibri 12 bold"), width=15,height=1, command=CriarContaAdmin)
     btn_criar.place(x=240,y=160)
 
+#------------------FUNÇÃO REMOVER CONTA (POR ACABAR)----------------------#
 def removerUtilizador():
     JanRemover = Toplevel(window)
     JanRemover.title("Remover Utilizadores")
@@ -422,6 +422,8 @@ btn_retornar_menu = Button(window, text="Menu", fg="black",font = ("Calibri 12 b
 
 #region JANELA DA APP ADMIN
 def JanelaAppAdmin():
+
+    window.title("Gestor de Roteiro de Viagens (Modo Administrador) ")
 
     #REMOVE OS BOTÕES NÃO NECESSÁRIOS DE INICIO DE SESSÃO
     btn_login.place_forget()
@@ -581,7 +583,6 @@ btn_retornar_menu = Button(window, text="Menu", fg="black",font = ("Calibri 12 b
 #endregion
 
 #region GUIAS E ROTEIROS
-
 def guias_roteiros():
 
     #REDIMENSIONAR A JANELA
@@ -1050,7 +1051,7 @@ btn_trilhos=Button(window, text = "",width = 220, height = 395,image = foto_tril
 
 #region GESTÃO DE COMENTÁRIOS
 
-#COMENTAR ANSE
+#COMENTARIOS ANSE
 def comentar_anse():
     txt_comentario.place(x=402,y=490, anchor=CENTER)
     btn_comentar_anse.place_forget()
@@ -1074,10 +1075,10 @@ def submeter_comentario_anse():
 def ver_cmt_anse():
     f = open("comentarios.txt","r")
     linhas = f.readlines()
-    anse = []
+    anse = ""
     for i in linhas:
         if str("Anse") in i:
-            anse.append(i)
+            anse+= i + "\n"
     if anse == []:
         messagebox.showerror("ERRO", "Não existem comentários.")
     else:
@@ -1091,16 +1092,17 @@ def ver_cmt_anse():
         x = (ws/2) - (w/2)
         y = (hs/2) - (h/2)
         JanComentarios.geometry('%dx%d+%d+%d' % (w, h, x, y))
-
-        lbl_cmt_anse= Label(JanComentarios,width=60, height=3,text=anse)
+        print(anse)
+        lbl_cmt_anse= Text(JanComentarios,width=60, height=5)
         lbl_cmt_anse.place(x=250,y=150,anchor=CENTER)
+        lbl_cmt_anse.insert("end", anse)
         
 btn_comentar_anse=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar_anse)
 txt_comentario = Text(window,width=80,height=5)
 btn_submeter_anse = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = submeter_comentario_anse)
 btn_ver_anse=Button(window, text="Ver comentários",fg="black", font = ("Calibri bold", 12),width=15,height=1, command = ver_cmt_anse)
 
-#COMENTAR ZLATNI
+#COMENTARIOS ZLATNI
 def comentar_zlatni():
     txt_comentario.place(x=402,y=490, anchor=CENTER)
     btn_comentar_zlatni.place_forget()
@@ -1176,6 +1178,7 @@ btn_submeter_kaanapali = Button(window, text="Submeter",fg="black", font = ("Cal
 
 #region CLASSIFICAÇÕES
 
+#CLASSIFICAR ANSE
 def gosto_anse():
     f = open("classificacoes.txt","a")
     f.write("Anse" + "\n")
@@ -1186,6 +1189,7 @@ def gosto_anse():
 
     messagebox.showinfo("Sucesso!",f"A sua classificação foi adicionada com sucesso! Esta praia já tem {num} gosto(s).")
 
+#CLASSIFICAR ZLATNI
 def gosto_zlatni():
     f = open("classificacoes.txt","a")
     f.write("Zlatni" + "\n")
@@ -1196,6 +1200,7 @@ def gosto_zlatni():
 
     messagebox.showinfo("Sucesso!",f"A sua classificação foi adicionada com sucesso! Esta praia já tem {num} gosto(s).")
 
+#CLASSIFICAR NAVAGIO
 def gosto_navagio():
     f = open("classificacoes.txt","a")
     f.write("Navagio" + "\n")
@@ -1206,6 +1211,7 @@ def gosto_navagio():
 
     messagebox.showinfo("Sucesso!",f"A sua classificação foi adicionada com sucesso! Esta praia já tem {num} gosto(s).")
 
+#CLASSIFICAR KAANAPALI
 def gosto_kaanapali():
     f = open("classificacoes.txt","a")
     f.write("Kaanapali" + "\n")
@@ -1226,21 +1232,25 @@ btn_gosto_kaanapali=Button(window, text="Gosto",fg="green", font = ("Calibri bol
 
 #region GESTÃO DE CATEGORIAS
 
-chk_g = IntVar()
+#CRIAÇÃO DOS CHECK BUTTONS COMO VARIÁVEIS
+chk_g = IntVar()    #GUIAS E ROTEIROS
 chk_g.set(1)
-chk_m = IntVar()
+chk_m = IntVar()    #MONTANHAS
 chk_m.set(1)
-chk_c = IntVar()
+chk_c = IntVar()    #CIDADES
 chk_c.set(1)
-chk_p = IntVar()
+chk_p = IntVar()    #PRAIAS
 chk_p.set(1)
-chk_r = IntVar()
-chk_t = IntVar()
+chk_r = IntVar()    #ROADTRIPS
+chk_t = IntVar()    #TRILHOS E OUTDOORS
 
 def escolha_categorias():
+
+    #CRIAÇÃO DE UMA NOVA JANELA
     JanEscolha = Toplevel(window)
     JanEscolha.title("Escolha de Categorias")
 
+    #DIMENSIONAR E CENTRAR A JANELA
     w = 450
     h = 230
     ws = JanEscolha.winfo_screenwidth()
@@ -1249,9 +1259,11 @@ def escolha_categorias():
     y = (hs/2) - (h/2)
     JanEscolha.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
+    #TÍTULO DA PÁGINA
     lbl_escolha = Label(JanEscolha, text="Escolha as 4 Categorias que deseja:",font=("Calibri 11 bold"),width=40,height=1)
     lbl_escolha.place(x=225,y=25,anchor=CENTER)
 
+    #CRIAÇÃO DOS CHECK BUTTONS
     chk_guias = Checkbutton(JanEscolha, text="Guias e Roteiros", variable = chk_g)
     chk_montanhas = Checkbutton(JanEscolha, text="Montanhas", variable = chk_m)
     chk_cidades = Checkbutton(JanEscolha, text="Cidades", variable = chk_c)
@@ -1259,13 +1271,15 @@ def escolha_categorias():
     chk_roadtrips = Checkbutton(JanEscolha, text="Roadtrips", variable = chk_r)
     chk_trilhos = Checkbutton(JanEscolha, text="Trilhos e Outdoors", variable = chk_t)
 
+    #POSICIONAMENTO DOS CHECK BUTTONS
     chk_guias.place(x=90, y=50)
     chk_montanhas.place(x=90,y=70)
     chk_cidades.place(x=90,y=90)
     chk_praias.place(x=250,y=50)
     chk_roadtrips.place(x=250,y=70)
     chk_trilhos.place(x=250,y=90)
-        
+
+    #BOTÃO DE CONFIRMAR A ESCOLHA 
     btn_confirmar=Button(JanEscolha,text="Confirmar",bg="green",font = ("Calibri 12 bold"),fg="white",width=10,height=1,command=JanelaAppAdmin)
     btn_confirmar.place(x=225,y=190,anchor=CENTER)
 
