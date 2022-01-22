@@ -634,6 +634,8 @@ def montanhas():
     btn_cidades.place_forget()
     btn_praia.place_forget()
     btn_sair.place_forget()
+    btn_roadtrip.place_forget()
+    btn_trilhos.place_forget()
 
     #REMOVE A LABEL DO MENU PRINCIPAL
     lbl_menu.place_forget()
@@ -802,6 +804,8 @@ def praias():
     btn_cidades.place_forget()
     btn_praia.place_forget()
     btn_sair.place_forget()
+    btn_roadtrip.place_forget()
+    btn_trilhos.place_forget()
 
     #REMOVE A LABEL DO MENU PRINCIPAL
     lbl_menu.place_forget()
@@ -824,6 +828,9 @@ def praias():
     btn_submeter_kaanapali.place_forget()
 
     btn_ver_anse.place_forget()
+    btn_ver_zlatni.place_forget()
+    btn_ver_kaanapali.place_forget()
+    btn_ver_navagio.place_forget()
 
     #REMOVE OS BOTÕES DE GOSTO
     btn_gosto_anse.place_forget()
@@ -895,10 +902,11 @@ def navagio():
     desc_navagio.place(x=445,y=400, anchor=CENTER)
 
     #COMENTÁRIO
-    btn_comentar_navagio.place(x=502,y=520,anchor=CENTER)
+    btn_comentar_navagio.place(x=414,y=520,anchor=CENTER)
+    btn_ver_navagio.place(x=572, y=520, anchor = CENTER)
 
     #GOSTO
-    btn_gosto_navagio.place(x=372,y=520,anchor=CENTER)
+    btn_gosto_navagio.place(x=292,y=520,anchor=CENTER)
 
 def anse():
     #REDIMENSIONAR A JANELA
@@ -960,10 +968,11 @@ def zlatni():
     desc_zlatni.place(x=445,y=400, anchor=CENTER)
 
     #COMENTÁRIO
-    btn_comentar_zlatni.place(x=502,y=520,anchor=CENTER)
+    btn_comentar_zlatni.place(x=414,y=520,anchor=CENTER)
+    btn_ver_zlatni.place(x=572, y=520, anchor = CENTER)
 
     #GOSTO
-    btn_gosto_zlatni.place(x=372,y=520,anchor=CENTER)
+    btn_gosto_zlatni.place(x=292,y=520,anchor=CENTER)
 
 def kaanapali():
     #REDIMENSIONAR A JANELA
@@ -991,11 +1000,12 @@ def kaanapali():
     #DESCRIÇÃO DA PRAIA
     desc_kaanapali.place(x=445,y=400, anchor=CENTER)
 
-    #COMENTÁRIO
-    btn_comentar_kaanapali.place(x=502,y=520,anchor=CENTER)
+      #COMENTÁRIO
+    btn_comentar_kaanapali.place(x=414,y=520,anchor=CENTER)
+    btn_ver_kaanapali.place(x=572, y=520, anchor = CENTER)
 
     #GOSTO
-    btn_gosto_kaanapali.place(x=372,y=520,anchor=CENTER)
+    btn_gosto_kaanapali.place(x=292,y=520,anchor=CENTER)
 
 #BOTÃO PRINCIPAL
 foto_praia=ImageTk.PhotoImage(Image.open("praias.png"))
@@ -1056,6 +1066,7 @@ def comentar_anse():
     txt_comentario.place(x=402,y=490, anchor=CENTER)
     btn_comentar_anse.place_forget()
     btn_gosto_anse.place_forget()
+    btn_ver_anse.place_forget()
     btn_submeter_anse.place(x=795,y=490,anchor=CENTER)
 
 def submeter_comentario_anse():
@@ -1070,7 +1081,7 @@ def submeter_comentario_anse():
 
     txt_comentario.place_forget()
     btn_submeter_anse.place_forget()
-    btn_comentar_anse.place(x=442,y=520,anchor=CENTER)
+    anse()
 
 def ver_cmt_anse():
     f = open("comentarios.txt","r")
@@ -1078,15 +1089,17 @@ def ver_cmt_anse():
     anse = ""
     for i in linhas:
         if str("Anse") in i:
-            anse+= i + "\n"
-    if anse == []:
+            edit = i.replace("Anse:","-")
+            anse+= edit + "\n"
+    if anse == "":
         messagebox.showerror("ERRO", "Não existem comentários.")
     else:
         JanComentarios = Toplevel(window)
         JanComentarios.title("Comentários Anse")
-
+        lbl_anse_cmt = Label(JanComentarios,text="Comentários da praia Anse", font=("Calibri 16 bold"), width=30, height = 3)
+        lbl_anse_cmt.place(x=250,y=30,anchor=CENTER)
         w = 500
-        h = 300
+        h = 200
         ws = JanComentarios.winfo_screenwidth()
         hs = JanComentarios.winfo_screenheight()
         x = (ws/2) - (w/2)
@@ -1094,7 +1107,7 @@ def ver_cmt_anse():
         JanComentarios.geometry('%dx%d+%d+%d' % (w, h, x, y))
         print(anse)
         lbl_cmt_anse= Text(JanComentarios,width=60, height=5)
-        lbl_cmt_anse.place(x=250,y=150,anchor=CENTER)
+        lbl_cmt_anse.place(x=250,y=120,anchor=CENTER)
         lbl_cmt_anse.insert("end", anse)
         
 btn_comentar_anse=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar_anse)
@@ -1107,6 +1120,7 @@ def comentar_zlatni():
     txt_comentario.place(x=402,y=490, anchor=CENTER)
     btn_comentar_zlatni.place_forget()
     btn_gosto_zlatni.place_forget()
+    btn_ver_zlatni.place_forget()
     btn_submeter_zlatni.place(x=795,y=490,anchor=CENTER)
 
 def submeter_comentario_zlatni():
@@ -1120,17 +1134,46 @@ def submeter_comentario_zlatni():
 
     txt_comentario.place_forget()
     btn_submeter_zlatni.place_forget()
-    btn_comentar_zlatni.place(x=442,y=520,anchor=CENTER)
+    zlatni()
+
+def ver_cmt_zlatni():
+    f = open("comentarios.txt","r")
+    linhas = f.readlines()
+    zlatni = ""
+    for i in linhas:
+        if str("Zlatni") in i:
+            edit = i.replace("Zlatni:","-")
+            zlatni+= edit + "\n"
+    if zlatni == "":
+        messagebox.showerror("ERRO", "Não existem comentários.")
+    else:
+        JanComentarios = Toplevel(window)
+        JanComentarios.title("Comentários Zlatni")
+        lbl_zlatni_cmt = Label(JanComentarios,text="Comentários da praia Zlatni", font=("Calibri 16 bold"), width=30, height = 3)
+        lbl_zlatni_cmt.place(x=250,y=30,anchor=CENTER)
+        w = 500
+        h = 200
+        ws = JanComentarios.winfo_screenwidth()
+        hs = JanComentarios.winfo_screenheight()
+        x = (ws/2) - (w/2)
+        y = (hs/2) - (h/2)
+        JanComentarios.geometry('%dx%d+%d+%d' % (w, h, x, y))
+        print(zlatni)
+        lbl_cmt_zlatni= Text(JanComentarios,width=60, height=5)
+        lbl_cmt_zlatni.place(x=250,y=120,anchor=CENTER)
+        lbl_cmt_zlatni.insert("end", zlatni)
 
 btn_comentar_zlatni=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar_zlatni)
 txt_comentario = Text(window,width=80,height=5)
 btn_submeter_zlatni = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = submeter_comentario_zlatni)
+btn_ver_zlatni=Button(window, text="Ver comentários",fg="black", font = ("Calibri bold", 12),width=15,height=1, command = ver_cmt_zlatni)
 
 #COMENTAR NAVAGIO
 def comentar_navagio():
     txt_comentario.place(x=402,y=490, anchor=CENTER)
     btn_comentar_navagio.place_forget()
     btn_gosto_navagio.place_forget()
+    btn_ver_navagio.place_forget()
     btn_submeter_navagio.place(x=795,y=490,anchor=CENTER)
 
 def submeter_comentario_navagio():
@@ -1144,17 +1187,46 @@ def submeter_comentario_navagio():
 
     txt_comentario.place_forget()
     btn_submeter_navagio.place_forget()
-    btn_comentar_navagio.place(x=442,y=520,anchor=CENTER)
+    navagio()
+
+def ver_cmt_navagio():
+    f = open("comentarios.txt","r")
+    linhas = f.readlines()
+    navagio = ""
+    for i in linhas:
+        if str("Navagio") in i:
+            edit = i.replace("Navagio:","-")
+            navagio+= edit + "\n"
+    if navagio == "":
+        messagebox.showerror("ERRO", "Não existem comentários.")
+    else:
+        JanComentarios = Toplevel(window)
+        JanComentarios.title("Comentários Navagio")
+        lbl_navagio_cmt = Label(JanComentarios,text="Comentários da praia Navagio", font=("Calibri 16 bold"), width=30, height = 3)
+        lbl_navagio_cmt.place(x=250,y=30,anchor=CENTER)
+        w = 500
+        h = 200
+        ws = JanComentarios.winfo_screenwidth()
+        hs = JanComentarios.winfo_screenheight()
+        x = (ws/2) - (w/2)
+        y = (hs/2) - (h/2)
+        JanComentarios.geometry('%dx%d+%d+%d' % (w, h, x, y))
+        print(navagio)
+        lbl_cmt_navagio= Text(JanComentarios,width=60, height=5)
+        lbl_cmt_navagio.place(x=250,y=120,anchor=CENTER)
+        lbl_cmt_navagio.insert("end", navagio)
 
 btn_comentar_navagio=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar_navagio)
 txt_comentario = Text(window,width=80,height=5)
 btn_submeter_navagio = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = submeter_comentario_navagio)
+btn_ver_navagio=Button(window, text="Ver comentários",fg="black", font = ("Calibri bold", 12),width=15,height=1, command = ver_cmt_navagio)
 
 #COMENTAR KAANAPALI
 def comentar_kaanapali():
     txt_comentario.place(x=402,y=490, anchor=CENTER)
     btn_comentar_kaanapali.place_forget()
     btn_gosto_kaanapali.place_forget()
+    btn_ver_kaanapali.place_forget()
     btn_submeter_kaanapali.place(x=795,y=490,anchor=CENTER)
 
 def submeter_comentario_kaanapali():
@@ -1168,11 +1240,39 @@ def submeter_comentario_kaanapali():
 
     txt_comentario.place_forget()
     btn_submeter_kaanapali.place_forget()
-    btn_comentar_kaanapali.place(x=442,y=520,anchor=CENTER)
+    kaanapali()
+
+def ver_cmt_kaanapali():
+    f = open("comentarios.txt","r")
+    linhas = f.readlines()
+    kaanapali = ""
+    for i in linhas:
+        if str("Kaanapali") in i:
+            edit = i.replace("Kaanapali:","-")
+            kaanapali+= edit + "\n"
+    if kaanapali == "":
+        messagebox.showerror("ERRO", "Não existem comentários.")
+    else:
+        JanComentarios = Toplevel(window)
+        JanComentarios.title("Comentários Kaanapali")
+        lbl_kaanapali_cmt = Label(JanComentarios,text="Comentários da praia Kaanapali", font=("Calibri 16 bold"), width=30, height = 3)
+        lbl_kaanapali_cmt.place(x=250,y=30,anchor=CENTER)
+        w = 500
+        h = 200
+        ws = JanComentarios.winfo_screenwidth()
+        hs = JanComentarios.winfo_screenheight()
+        x = (ws/2) - (w/2)
+        y = (hs/2) - (h/2)
+        JanComentarios.geometry('%dx%d+%d+%d' % (w, h, x, y))
+        print(kaanapali)
+        lbl_cmt_kaanapali= Text(JanComentarios,width=60, height=5)
+        lbl_cmt_kaanapali.place(x=250,y=120,anchor=CENTER)
+        lbl_cmt_kaanapali.insert("end", kaanapali)
 
 btn_comentar_kaanapali=Button(window, text="Adicionar comentário",fg="black", font = ("Calibri bold", 12),width=20,height=1, command = comentar_kaanapali)
 txt_comentario = Text(window,width=80,height=5)
 btn_submeter_kaanapali = Button(window, text="Submeter",fg="black", font = ("Calibri bold", 12),width=10,height=1, command = submeter_comentario_kaanapali)
+btn_ver_kaanapali=Button(window, text="Ver comentários",fg="black", font = ("Calibri bold", 12),width=15,height=1, command = ver_cmt_kaanapali)
 
 #endregion
 

@@ -1,3 +1,4 @@
 Anse: lucas:boa
 Zlatni: lucas:fixe
 Anse: lucas:voltaria
+Anse: lucas:teste
