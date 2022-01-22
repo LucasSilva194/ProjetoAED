@@ -549,7 +549,7 @@ def JanelaAppAdmin():
 
     utilizadores_Menu = Menu(barra_admin)
     utilizadores_Menu.add_command(label="Adicionar Utilizadores", command=JanelaCriarAdmin)
-    utilizadores_Menu.add_command(label="Remover Utilizadores", command=removerUtilizador)
+    # utilizadores_Menu.add_command(label="Remover Utilizadores", command=removerUtilizador)
     barra_admin.add_cascade(label="Utilizadores", menu=utilizadores_Menu)
 
     categorias_menu = Menu(barra_admin)
@@ -557,8 +557,8 @@ def JanelaAppAdmin():
     barra_admin.add_cascade(label = "Categorias", menu=categorias_menu)
 
     ordenar_menu = Menu(barra_admin)
-    ordenar_menu.add_command(label="Mais Popular", command = dev)
-    ordenar_menu.add_command(label="Mais Comentada", command = dev)
+    ordenar_menu.add_command(label="Mais Popular", command = ordenar_gostos)
+    # ordenar_menu.add_command(label="Mais Comentada", command = dev)
     barra_admin.add_cascade(label="Ordenar", menu=ordenar_menu)
 
     #REDIMENSIONAR A JANELA
@@ -1321,6 +1321,100 @@ def gosto_kaanapali():
     num = encontrar.count("Kaanapali")
 
     messagebox.showinfo("Sucesso!",f"A sua classificação foi adicionada com sucesso! Esta praia já tem {num} gosto(s).")
+
+def ordenar_gostos():
+
+    f= open("classificacoes.txt","r")
+    encontrar = f.read()
+    anse = encontrar.count("Anse")
+    zlatni = encontrar.count("Zlatni")
+    navagio = encontrar.count("Navagio")
+    kaanapali = encontrar.count("Kaanapali")
+    
+    praias = [anse,zlatni,navagio,kaanapali]
+    praias.sort(reverse=True)
+    min = praias.pop()
+
+
+    if anse !=0 or zlatni !=0 or navagio !=0 or kaanapali != 0:
+        if kaanapali > navagio:
+            if kaanapali > zlatni:
+                if kaanapali > anse:
+                    btn_kaanapali.place(x=55,y=90)
+                    btn_anse.place(x=450,y=90)
+                    btn_zlatni.place(x=55,y=310)
+                    btn_navagio.place(x=450,y=310)
+                else:
+                    btn_anse.place(x=55,y=90)
+                    btn_kaanapali.place(x=450,y=90)
+                    btn_zlatni.place(x=55,y=310)
+                    btn_navagio.place(x=450,y=310)
+            else:
+                btn_anse.place(x=55,y=90)
+                btn_zlatni.place(x=450,y=90)
+                btn_kaanapali.place(x=55,y=310)
+                btn_navagio.place(x=450,y=310)
+        elif navagio > kaanapali:
+            if navagio > zlatni:
+                if navagio > anse:
+                    btn_navagio.place(x=55,y=90)
+                    btn_anse.place(x=450,y=90)
+                    btn_zlatni.place(x=55,y=310)
+                    btn_kaanapali.place(x=450,y=310)
+                else:
+                    btn_anse.place(x=55,y=90)
+                    btn_navagio.place(x=450,y=90)
+                    btn_zlatni.place(x=55,y=310)
+                    btn_kaanapali.place(x=450,y=310)
+            else:
+                btn_anse.place(x=55,y=90)
+                btn_zlatni.place(x=450,y=90)
+                btn_navagio.place(x=55,y=310)
+                btn_kaanapali.place(x=450,y=310)
+        elif zlatni > kaanapali:
+            if zlatni > navagio:
+                if zlatni > anse:
+                    btn_zlatni.place(x=55,y=90)
+                    btn_anse.place(x=450,y=90)
+                    btn_navagio.place(x=55,y=310)
+                    btn_kaanapali.place(x=450,y=310)
+                else:
+                    btn_anse.place(x=55,y=90)
+                    btn_zlatni.place(x=450,y=90)
+                    btn_navagio.place(x=55,y=310)
+                    btn_kaanapali.place(x=450,y=310)
+            else:
+                btn_anse.place(x=55,y=90)
+                btn_navagio.place(x=450,y=90)
+                btn_zlatni.place(x=55,y=310)
+                btn_kaanapali.place(x=450,y=310)
+        elif anse > kaanapali:
+            if anse > navagio:
+                if anse > zlatni:
+                    btn_anse.place(x=55,y=90)
+                    btn_zlatni.place(x=450,y=90)
+                    btn_navagio.place(x=55,y=310)
+                    btn_kaanapali.place(x=450,y=310)
+                else:
+                    btn_zlatni.place(x=55,y=90)
+                    btn_anse.place(x=450,y=90)
+                    btn_navagio.place(x=55,y=310)
+                    btn_kaanapali.place(x=450,y=310)
+            else:
+                btn_zlatni.place(x=55,y=90)
+                btn_navagio.place(x=450,y=90)
+                btn_anse.place(x=55,y=310)
+                btn_kaanapali.place(x=450,y=310)
+        else:
+            btn_zlatni.place(x=55,y=90)
+            btn_navagio.place(x=455,y=90)
+            btn_kaanapali.place(x=55,y=310)
+            btn_anse.place(x=450,y=310)
+    else:
+        btn_anse.place(x=55,y=90)
+        btn_zlatni.place(x=450,y=90)
+        btn_navagio.place(x=55,y=310)
+        btn_kaanapali.place(x=450,y=310)
 
 #BOTÕES
 btn_gosto_anse=Button(window, text="Gosto",fg="green", font = ("Calibri bold", 12),width=6,height=1, command = gosto_anse)
