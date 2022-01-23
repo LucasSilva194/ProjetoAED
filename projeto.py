@@ -422,7 +422,15 @@ btn_retornar_menu = Button(window, text="Menu", fg="black",font = ("Calibri 12 b
 
 #region JANELA DA APP ADMIN
 def JanelaAppAdmin():
-
+    
+    #REDIMENSIONAR A JANELA
+    w = 980
+    h = 550
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
     window.title("Gestor de Roteiro de Viagens (Modo Administrador) ")
 
     #REMOVE OS BOTÕES NÃO NECESSÁRIOS DE INICIO DE SESSÃO
@@ -561,14 +569,6 @@ def JanelaAppAdmin():
     # ordenar_menu.add_command(label="Mais Comentada", command = dev)
     barra_admin.add_cascade(label="Ordenar", menu=ordenar_menu)
 
-    #REDIMENSIONAR A JANELA
-    w = 980
-    h = 550
-    ws = window.winfo_screenwidth()
-    hs = window.winfo_screenheight()
-    x = (ws/2) - (w/2)
-    y = (hs/2) - (h/2)
-    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
     window.configure(bg ="white", menu=barra_admin)
 
 #LABEL MENU PRINCIPAL
@@ -1330,91 +1330,163 @@ def ordenar_gostos():
     zlatni = encontrar.count("Zlatni")
     navagio = encontrar.count("Navagio")
     kaanapali = encontrar.count("Kaanapali")
+
+    p_anse = False
+    p_zlatni = False
+    p_navagio = False
+    p_kaanapali = False
+
+    #PRIMEIRA POSIÇÃO
+    if anse != 0 or zlatni != 0 or navagio != 0 or kaanapali != 0:
+        if anse > zlatni and anse > navagio and anse > kaanapali:
+            btn_anse.place(x=55,y=90)
+            p_anse = True
+        elif zlatni > anse and zlatni > navagio and zlatni > kaanapali:
+            btn_zlatni.place(x=55,y=90)
+            p_zlatni = True
+        elif navagio > anse and navagio > zlatni and navagio > kaanapali:
+            btn_navagio.place(x=55,y=90)
+            p_navagio = True
+        elif kaanapali > anse and kaanapali > zlatni and kaanapali > navagio:
+            btn_kaanapali.place(x=55,y=90)
+            p_kaanapali = True
+
+    s_anse = False
+    s_zlatni = False
+    s_navagio = False
+    s_kaanapali = False
+
+    #SEGUNDA POSIÇÃO
+    if p_anse == True:
+        if zlatni > navagio and zlatni > kaanapali:
+            btn_zlatni.place(x=450,y=90)
+            s_zlatni = True
+        elif navagio > zlatni and navagio > kaanapali:
+            btn_navagio.place(x=450,y=90)
+            s_navagio = True
+        elif kaanapali > zlatni and kaanapali > navagio:
+            btn_kaanapali.place(x=450,y=90)
+            s_kaanapali = True
+    elif p_zlatni == True:
+        if anse > navagio and anse > kaanapali:
+            btn_anse.place(x=450,y=90)
+            s_anse = True
+        elif navagio > anse and navagio > kaanapali:
+            btn_navagio.place(x=450,y=90)
+            s_navagio = True
+        elif kaanapali > anse and kaanapali > navagio:
+            btn_kaanapali.place(x=450,y=90)
+            s_kaanapali = True
+    elif p_navagio == True:
+        if anse > zlatni and anse > kaanapali:
+            btn_anse.place(x=450,y=90)
+            s_anse = True
+        elif zlatni > anse and zlatni > kaanapali:
+            btn_zlatni.place(x=450,y=90)
+            s_zlatni = True
+        elif kaanapali > anse and kaanapali > zlatni:
+            btn_kaanapali.place(x=450,y=90)
+            s_kaanapali = True
+    elif p_kaanapali == True:
+        if anse > zlatni and anse > navagio:
+            btn_anse.place(x=450,y=90)
+            s_anse = True
+        elif zlatni > anse and zlatni > navagio:
+            btn_zlatni.place(x=450,y=90)
+            s_zlatni = True
+        elif navagio > anse and navagio > zlatni:
+            btn_navagio.place(x=450,y=90)
+            s_navagio = True
     
-    praias = [anse,zlatni,navagio,kaanapali]
-    praias.sort(reverse=True)
-    min = praias.pop()
-
-
-    if anse !=0 or zlatni !=0 or navagio !=0 or kaanapali != 0:
-        if kaanapali > navagio:
-            if kaanapali > zlatni:
-                if kaanapali > anse:
-                    btn_kaanapali.place(x=55,y=90)
-                    btn_anse.place(x=450,y=90)
-                    btn_zlatni.place(x=55,y=310)
-                    btn_navagio.place(x=450,y=310)
-                else:
-                    btn_anse.place(x=55,y=90)
-                    btn_kaanapali.place(x=450,y=90)
-                    btn_zlatni.place(x=55,y=310)
-                    btn_navagio.place(x=450,y=310)
-            else:
-                btn_anse.place(x=55,y=90)
-                btn_zlatni.place(x=450,y=90)
-                btn_kaanapali.place(x=55,y=310)
-                btn_navagio.place(x=450,y=310)
-        elif navagio > kaanapali:
-            if navagio > zlatni:
-                if navagio > anse:
-                    btn_navagio.place(x=55,y=90)
-                    btn_anse.place(x=450,y=90)
-                    btn_zlatni.place(x=55,y=310)
-                    btn_kaanapali.place(x=450,y=310)
-                else:
-                    btn_anse.place(x=55,y=90)
-                    btn_navagio.place(x=450,y=90)
-                    btn_zlatni.place(x=55,y=310)
-                    btn_kaanapali.place(x=450,y=310)
-            else:
-                btn_anse.place(x=55,y=90)
-                btn_zlatni.place(x=450,y=90)
+    #TERCEIRA E QUARTA POSIÇÃO
+    if s_anse == True:
+        if p_zlatni == True:
+            if navagio > kaanapali:
                 btn_navagio.place(x=55,y=310)
                 btn_kaanapali.place(x=450,y=310)
-        elif zlatni > kaanapali:
-            if zlatni > navagio:
-                if zlatni > anse:
-                    btn_zlatni.place(x=55,y=90)
-                    btn_anse.place(x=450,y=90)
-                    btn_navagio.place(x=55,y=310)
-                    btn_kaanapali.place(x=450,y=310)
-                else:
-                    btn_anse.place(x=55,y=90)
-                    btn_zlatni.place(x=450,y=90)
-                    btn_navagio.place(x=55,y=310)
-                    btn_kaanapali.place(x=450,y=310)
             else:
-                btn_anse.place(x=55,y=90)
-                btn_navagio.place(x=450,y=90)
+                btn_kaanapali.place(x=55,y=310)
+                btn_navagio.place(x=450,y=310)
+        elif p_navagio == True:
+            if zlatni > kaanapali:
                 btn_zlatni.place(x=55,y=310)
                 btn_kaanapali.place(x=450,y=310)
-        elif anse > kaanapali:
-            if anse > navagio:
-                if anse > zlatni:
-                    btn_anse.place(x=55,y=90)
-                    btn_zlatni.place(x=450,y=90)
-                    btn_navagio.place(x=55,y=310)
-                    btn_kaanapali.place(x=450,y=310)
-                else:
-                    btn_zlatni.place(x=55,y=90)
-                    btn_anse.place(x=450,y=90)
-                    btn_navagio.place(x=55,y=310)
-                    btn_kaanapali.place(x=450,y=310)
             else:
-                btn_zlatni.place(x=55,y=90)
-                btn_navagio.place(x=450,y=90)
+                btn_kaanapali.place(x=55,y=310)
+                btn_zlatni.place(x=450,y=310)
+        elif p_kaanapali == True:
+            if zlatni > navagio:
+                btn_zlatni.place(x=55,y=310)
+                btn_navagio.place(x=450,y=310)
+            else:
+                btn_zlatni.place(x=450,y=310)
+                btn_navagio.place(x=55,y=310)
+    elif s_zlatni == True:
+        if p_anse == True:
+            if navagio > kaanapali:
+                btn_navagio.place(x=55,y=310)
+                btn_kaanapali.place(x=450,y=310)
+            else:
+                btn_kaanapali.place(x=55,y=310)
+                btn_navagio.place(x=450,y=310)
+        elif p_navagio == True:
+            if anse > kaanapali:
                 btn_anse.place(x=55,y=310)
                 btn_kaanapali.place(x=450,y=310)
-        else:
-            btn_zlatni.place(x=55,y=90)
-            btn_navagio.place(x=455,y=90)
-            btn_kaanapali.place(x=55,y=310)
-            btn_anse.place(x=450,y=310)
-    else:
-        btn_anse.place(x=55,y=90)
-        btn_zlatni.place(x=450,y=90)
-        btn_navagio.place(x=55,y=310)
-        btn_kaanapali.place(x=450,y=310)
+            else:
+                btn_anse.place(x=450,y=310)
+                btn_kaanapali.place(x=55,y=310)
+        elif p_kaanapali == True:
+            if anse > navagio:
+                btn_anse.place(x=55,y=310)
+                btn_navagio.place(x=450,y=310)
+            else:
+                btn_navagio.place(x=55,y=310)
+                btn_anse.place(x=450,y=310)
+    elif s_navagio == True:
+        if p_anse == True:
+            if zlatni > kaanapali:
+                btn_zlatni.place(x=55,y=310)
+                btn_kaanapali.place(x=450,y=310)
+            else:
+                btn_kaanapali.place(x=55,y=310)
+                btn_zlatni.place(x=450,y=310)
+        elif p_zlatni == True:
+            if anse > kaanapali:
+                btn_anse.place(x=55,y=310)
+                btn_kaanapali.place(x=450,y=310)
+            else:
+                btn_anse.place(x=450,y=310)
+                btn_kaanapali.place(x=55,y=310)
+        elif p_kaanapali == True:
+            if anse > zlatni:
+                btn_anse.place(x=55,y=310)
+                btn_zlatni.place(x=450,y=310)
+            else:
+                btn_anse.place(x=450,y=310)
+                btn_zlatni.place(x=55,y=310)
+    elif s_kaanapali == True:
+        if p_anse == True:
+            if zlatni > navagio:
+                btn_zlatni.place(x=55,y=310)
+                btn_navagio.place(x=450,y=310)
+            else:
+                btn_zlatni.place(x=450,y=310)
+                btn_navagio.place(x=55,y=310)
+        elif p_zlatni == True:
+            if anse > navagio:
+                btn_anse.place(x=55,y=310)
+                btn_navagio.place(x=450,y=310)
+            else:
+                btn_anse.place(x=450,y=310)
+                btn_navagio.place(x=55,y=310)
+        elif p_navagio == True:
+            if anse > zlatni:
+                btn_anse.place(x=55,y=310)
+                btn_zlatni.place(x=450,y=310)
+            else:
+                btn_anse.place(x=450,y=310)
+                btn_zlatni.place(x=55,y=310)
 
 #BOTÕES
 btn_gosto_anse=Button(window, text="Gosto",fg="green", font = ("Calibri bold", 12),width=6,height=1, command = gosto_anse)
