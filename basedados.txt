@@ -2,3 +2,5 @@ lucas;123;admin;lucas@gmail.com
 chico;456;user;chigo@email.com
 filipa;444;user;filipa@gmail.com
 professor;000;admin;profe@gmail.com
+Administrador;adm;admin;admin@admin.com
+exemplo;000;user;exemplo@aaa.com
